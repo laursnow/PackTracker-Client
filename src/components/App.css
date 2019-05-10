@@ -1,0 +1,110 @@
+/* 
+font-family: 'Bree Serif', serif;
+font-family: 'Pacifico', cursive; */
+
+* {
+  box-sizing: border-box;
+  font-family: 'Bree Serif', serif;
+}
+
+
+html {
+  height: 100%;
+  /* background-image: url("../images/background-itinerator.jpg"); */
+  /* filter: blur(8px);
+  -webkit-filter: blur(8px); */
+  /* height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat; */
+  background-color: gray;
+}
+
+h1, h3 {
+  font-family: 'Bree Serif', serif;
+  color: white;
+}
+
+li {
+  font-size: 60px;
+}
+
+ul {
+  list-style: none;
+}
+
+.landing-links a:after {
+  color: white;
+  content: '<';
+  position: absolute;
+  padding-left: 5px;
+}
+
+.landing-links a:hover::after {
+  color: black;
+  text-shadow: none;
+  }
+
+.animate a:hover::after {
+  color: black;
+  text-shadow: none;
+  transition: 0.30s;
+  -webkit-transition: 0.30s;
+  -moz-transition: 0.30s;
+  -ms-transition: 0.30s;
+  -o-transition: 0.30s;
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+}
+
+.shadow {
+  text-shadow: 2px 2px 2px #000000;
+}
+
+a:link, a:visited  {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+
+}
+
+h2 {
+  font-family: 'Pacifico', cursive;
+  color: white;
+}
+
+.userprofile-container, .loader {
+  display: flex;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.itinerary-list {
+  position: relative;
+  margin: 20px;
+}
+
+.ital {
+  font-style: italic;
+  font-size: 125%;
+  font-family: 'Pacifico', cursive;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.icon {
+  position: relative;
+  margin-right: 10px;
+}
+
+.about {
+  margin-top: 1000px
+}
