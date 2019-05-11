@@ -211,8 +211,8 @@ export const deleteItem = (id, category) => dispatch => {
     });
 };
 
-export const postItem = (post, category, itineraryId) => dispatch => {
-    console.log('postItem');
+export const postItem = (post, category) => dispatch => {
+    console.log('postItem', `${API_BASE_URL}/${category}`);
     dispatch(fetchRequest());
     fetch(`${API_BASE_URL}/${category}`, {
         method: "POST",

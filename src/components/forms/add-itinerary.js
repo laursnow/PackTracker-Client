@@ -6,6 +6,7 @@ import { postItinerary } from "../../redux/actions/";
 import DateTimePicker from "react-widgets/lib/DateTimePicker";
 import momentLocalizer from "react-widgets-moment";
 import moment from 'moment';
+import "../App.css";
 
 momentLocalizer(moment);
 
@@ -46,25 +47,31 @@ export class CreateItineraryForm extends React.Component {
       )}>
         {successMessage}
         {errorMessage}
+
+        
+        <label htmlFor="title">Trip title</label>
         <Field
           name="title"
           type="text"
           component={Input}
-          label="Title"
-          validate={[required, nonEmpty]}
+          validate={[required]}
         />
+
+        
+<label htmlFor="date-leave">Leave date</label>
         <Field
           name="date-leave"
           showTime={false}
           component={datePicker}
-          label="Date Leaving"
           validate={[required]}
         />
-        <Field
+        
+
+        <label htmlFor="date-return">Return date</label>
+          <Field
           name="date-return"
           showTime={false}
           component={datePicker}
-          label="Date Returning"
           validate={[required]}
         />
 
@@ -89,7 +96,7 @@ export class CreateItineraryForm extends React.Component {
           type="submit"
           disabled={this.props.pristine || this.props.submitting}
         >
-          Send message
+          Save Itinerary
         </button>
       </form>
     );
@@ -97,7 +104,7 @@ export class CreateItineraryForm extends React.Component {
 }
 
 export default reduxForm({
-  form: "itinerary",
+  form: "_itinerary",
   onSubmitFail: (errors, dispatch) =>
     dispatch(focus("contact", Object.keys(errors)[0]))
 })(CreateItineraryForm);

@@ -1,12 +1,14 @@
 import React from "react";
 import "../App.css";
 import {BrowserRouter as Link} from 'react-router-dom';
+import Nav from '../nav';
 
 
-export class Itinerary extends React.Component {
+export class ViewItinerary extends React.Component {
     render() {
         return (
-            <div className="About">
+            <div className='nav'><Nav />
+            <div className="item-view">
                 <header>
                     <h1><Link to="/">Itinerator</Link></h1>
                 </header>
@@ -16,9 +18,10 @@ export class Itinerary extends React.Component {
                 <Link to="/dashboard">Return to dashboard</Link>
                 </main>
             </div>
+            </div>
         )
     }
 }
 
 
-export default Itinerary;
+export default ViewItinerary;

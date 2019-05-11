@@ -1,26 +1,22 @@
 import React from "react";
 import { reduxForm, Field, focus } from "redux-form";
 import Input from "./input";
-import { required, nonEmpty } from "./validators";
-import { postItinerary } from "../../redux/actions/";
+import ImageInput from "./image-input"
+import { required } from "./validators";
+import { postItem } from "../../redux/actions/";
 import DateTimePicker from "react-widgets/lib/DateTimePicker";
 import momentLocalizer from "react-widgets-moment";
 import moment from 'moment';
+import "../App.css";
 
 momentLocalizer(moment);
 
-// date: Date,
-// time: String,
-// address: String,
-// phone: String,
-// email: String,
-// notes: String,
-// ticket: String,
-// itinerary
 
-export class CreateItineraryForm extends React.Component {
+class CreateActivityForm extends React.Component {
     onSubmit(values, dispatch) {
-    return dispatch(postItinerary(values))
+      console.log('activityform', values)
+      let category = 'activity';
+    return dispatch(postItem(values, category))
   }
 
   render() {
@@ -55,33 +51,68 @@ export class CreateItineraryForm extends React.Component {
       )}>
         {successMessage}
         {errorMessage}
+
+        <label htmlFor="notes">Activity name</label>
         <Field
-          name="title"
+          name="notes"
           type="text"
           component={Input}
-          label="Title"
-          validate={[required, nonEmpty]}
-        />
-        <Field
-          name="date-leave"
-          showTime={false}
-          component={datePicker}
-          label="Date Leaving"
-          validate={[required]}
-        />
-        <Field
-          name="date-return"
-          showTime={false}
-          component={datePicker}
-          label="Date Returning"
           validate={[required]}
         />
 
+
+<label htmlFor="date">Date</label>
+         <Field
+          name="date"
+          showTime={false}
+          component={datePicker}
+          validate={[required]}
+        />
+
+
+<label htmlFor="time">Time</label>
+        <Field
+          name="time"
+          type="text"
+          component={Input}
+        />
+
+
+<label htmlFor="address">Address</label>
+        <Field
+          name="address"
+          type="text"
+          component={Input}
+        />
+
+
+<label htmlFor="phone">Phone number</label>
+        <Field
+          name="phone"
+          type="text"
+          component={Input}
+        />
+
+
+<label htmlFor="email">Email Contact</label>
+        <Field
+          name="email"
+          type="text"
+          component={Input}
+        />
+
+
+<label htmlFor="ticket">Ticket/Image</label>
+        <Field
+          name="ticket"
+          type="text"
+          component={ImageInput}
+        />
         <button
           type="submit"
           disabled={this.props.pristine || this.props.submitting}
         >
-          Send message
+          Record Activity
         </button>
       </form>
     );
@@ -89,8 +120,8 @@ export class CreateItineraryForm extends React.Component {
 }
 
 export default reduxForm({
-  form: "itinerary",
+  form: "_activity",
   onSubmitFail: (errors, dispatch) =>
     dispatch(focus("contact", Object.keys(errors)[0]))
-})(CreateItineraryForm);
+})(CreateActivityForm);
 
