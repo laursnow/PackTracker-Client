@@ -123,3 +123,15 @@ a:hover, a:active {
   margin-right: 10px;
 }
 
+i {
+  padding: 10px;
+  font-size: 25px;
+}
+
+i:hover {
+  color: white;
+}
+
+.bree-font {
+  font-family: 'Bree Serif', serif;
+}

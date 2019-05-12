@@ -1,9 +1,7 @@
 import React from "react";
 import "./App.css";
 import {
-  BrowserRouter as Router,
-  Route,
-  Link,
+  Link
 } from "react-router-dom";
 // import CreateItinerary from "./display/create";
 // import Registration from "./registration-page";
@@ -24,7 +22,6 @@ class Nav extends React.Component {
             <Link to="/">Logout</Link>
           </li>
         </ul>
-
     );
   }
 }

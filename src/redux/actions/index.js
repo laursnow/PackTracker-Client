@@ -157,6 +157,7 @@ export const postItinerary = (post) => dispatch => {
 
 
 export const deleteItinerary = (id) => dispatch => {
+    console.log('deleteitinerary firiing', id, `${API_BASE_URL}/itinerary/${id}`)
     dispatch(fetchRequest());
     fetch(`${API_BASE_URL}/itinerary/${id}`, {
         method: "DELETE",

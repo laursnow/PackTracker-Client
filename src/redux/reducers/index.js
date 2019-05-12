@@ -1,26 +1,3 @@
-// const initialState = {
-//     status: "",
-//     itineraries: [{id: "5cd121b8b116ec454c107d0d",
-//     title: "Chicago",
-//     date_leave: "2019-04-03T04:00:00.000Z",
-//     date_return: "2019-05-18T04:00:00.000Z",
-//     travel: [],
-//     lodging: [],
-//     activity: [],
-//     public: false},
-//     {id: "677cd121b8b116545365765",
-//     title: "Philly",
-//     date_leave: "2019-04-03T04:00:00.000Z",
-//     date_return: "2019-05-18T04:00:00.000Z",
-//     travel: [],
-//     lodging: [],
-//     activity: [],
-//     public: false}],
-//     authToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjZmY4NTljNGZjOTI0YjMwOTM4MzY3IiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJsYXVyZW5AbGF1cmVuLmNvbSIsImF1dGhvcl9vZiI6W119LCJpYXQiOjE1NTcxMzM0MTgsImV4cCI6MTU1NzczODIxOCwic3ViIjoidGVzdCJ9.MasNjx8bqLTKeP7W4IYAnQvsY1fMtfIuIyXktQY1jNA',
-//     currentUser: null,
-//     error: ""
-//   }
-
 import {
   FETCH_FAILURE,
   FETCH_REQUEST,
@@ -41,33 +18,74 @@ import {
   SET_AUTH_TOKEN
 } from "../actions/auth";
 
-const initialState = {
-  status: "",
-  error: "",
-  itineraries: [{
-    id: null,
-      title: null,
-      date_leave: null,
-      date_return: null,
-      travel: [null],
-      lodging: [null],
-      activity: [null],
-      public: false,
-      timestamp: null
-    }],
+// const initialState = {
+//   status: "",
+//   error: "",
+//   itineraries: [{
+//     id: null,
+//       title: null,
+//       date_leave: null,
+//       date_return: null,
+//       travel: [null],
+//       lodging: [null],
+//       activity: [null],
+//       public: false,
+//       timestamp: null
+//     }],
       
-  author_of_snippets: [{
-    id: null,
-    title: null,
-    date_leave: null,
-    date_return: null,
-    timestamp: null
-  }],
+//   author_of_snippets: [{
+//     id: null,
+//     title: null,
+//     date_leave: null,
+//     date_return: null,
+//     timestamp: null
+//   }],
 
-  auth: {
-    authToken: null,
-    currentUser: null
-  }
+//   auth: {
+//     authToken: null,
+//     currentUser: null
+//   }
+// };
+
+const initialState = {
+ status: "",
+ error: "",
+
+ itineraries: 
+  [{id: "5cd121b8b116ec454c107d0d",
+    title: "Chicago",
+    date_leave: "2019-04-03T04:00:00.000Z",
+    date_return: "2019-05-18T04:00:00.000Z",
+    travel: [],
+    lodging: [],
+    activity: [],
+    public: false},
+  {id: "677cd121b8b116545365765",
+    title: "Philly",
+    date_leave: "2019-04-03T04:00:00.000Z",
+    date_return: "2019-05-18T04:00:00.000Z",
+    travel: [],
+    lodging: [],
+    activity: [],
+    public: false}],
+
+  author_of_snippets: [{
+    id: "5cd121b8b116ec454c107d0d",
+    title: "Chicago",
+    date_leave: "2019-04-03T04:00:00.000Z",
+    date_return: "2019-05-18T04:00:00.000Z",
+    timestamp: "2019-05-18T04:00:00.000Z"
+  },
+
+  {
+    id: "677cd121b8b116545365765",
+    title: "Philly",
+    date_leave: "2019-04-03T04:00:00.000Z",
+    date_return: "2019-05-18T04:00:00.000Z",
+    timestamp: "2019-05-18T04:00:00.000Z"
+  }],
+    authToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjZmY4NTljNGZjOTI0YjMwOTM4MzY3IiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJsYXVyZW5AbGF1cmVuLmNvbSIsImF1dGhvcl9vZiI6W119LCJpYXQiOjE1NTcxMzM0MTgsImV4cCI6MTU1NzczODIxOCwic3ViIjoidGVzdCJ9.MasNjx8bqLTKeP7W4IYAnQvsY1fMtfIuIyXktQY1jNA',
+  currentUser: 'testuser'
 };
 
 function itinerator(state = initialState, action) {

@@ -1,23 +1,36 @@
 import React from 'react';
 import "./App.css";
+import { connect } from 'react-redux';
+import { deleteItinerary } from '../redux/actions'
+import {
+  Link
+} from "react-router-dom";
 
-class Snippet extends React.Component {
+export class Snippet extends React.Component {
     render() {
       return (  
+        
         <div className="item-snippet">
-        <h3>Itineraries</h3>
-        <p>snippets blah blah></p>
-          {/* <h3>{stateProps.title}</h3> */}
-          {/* <h3>{this.date_leave}<span className="ital">to</span> {this.date_return}</h3>
-          <h3>Last Updated: {this.timestamp}</h3>
-          <br/> */}
-          {/* <i onClick={() => this.props.dispatchAction("EDIT")} class="fas fa-edit"></i>Edit   */}
-          {/* <i onClick={() => this.props.dispatchAction("TRASH")} class="fas fa-trash"></i>  Delete
-          <br />
-          <i onClick={() => this.props.dispatchAction("PLUS")} class="fas fa-plus"></i> Add New */}
+          <h3>{this.props.title}</h3>
+          <h3>{this.props.date_leave}<span className="ital">to</span> {this.props.date_return}</h3>
+          <h3>Last Updated: {this.props.timestamp}</h3>
+          <br/> 
+          <Link to={{
+            pathname: `/view/${this.props.index}`,
+            state: { index: this.props.index }
+          }}>
+          <i class="fas fa-edit" alt="Edit"><span className="bree-font"> View/Edit</span></i></Link>
+       <i onClick={() => this.props.deleteItinerary(this.props.id)} class="fas fa-trash" alt="Delete"><span className="bree-font"> Delete</span></i>
         </div>
       )
     }
   }
-  export default Snippet;
+
+
+  const mapDispatchToProps =  {
+    deleteItinerary
+  }
+
+  
+  export default connect(null, mapDispatchToProps)(Snippet)
   
