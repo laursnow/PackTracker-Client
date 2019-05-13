@@ -11,31 +11,29 @@ export class LandingPage extends React.Component {
     render() {
       return (
           <div className="container-app">
-            <div className="item-landing">
+            <div className="item-landing-1">
+            <div className="item-title">
               <h1 id="top" className="shadow">
-                <Link to="/">Itinerator</Link>
+                Itinerator
               </h1>
               <h3 className="shadow">
                 A simple web app for building travel itineraries
               </h3>
+              </div></div>
+              <div className="item-landing-2">
               <ul className="landing-links">
-                <li className="shadow">
+                <li className="shadow animate">
                   <Link to="/login">Login</Link>
                 </li>
   
-                <li className="shadow">
+                <li className="shadow animate">
                   <Link to="/register">Register</Link>
                 </li>
   
                 <li className="shadow animate">
-                  <HashLink to="/#about">Learn More</HashLink>
+                  <Link to="/about">Learn More</Link>
                 </li>
               </ul>
-            </div>
-  
-            <div id="about" className="item-about">
-              blah.
-              <HashLink to="/#top">Back to top</HashLink>
             </div>
           </div>
       );
@@ -44,5 +42,4 @@ export class LandingPage extends React.Component {
     
   export default connect()(LandingPage);
   
-  // Deal with update blocking - https://reacttraining.com/react-router/web/guides/dealing-with-update-blocking
   

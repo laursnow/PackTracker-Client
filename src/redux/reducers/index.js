@@ -10,83 +10,73 @@ import {
   EDIT_ITEM_SUCCESS
 } from "../actions";
 
-import {
-  AUTH_ERROR,
-  AUTH_REQUEST,
-  AUTH_SUCCESS,
-  CLEAR_AUTH,
-  SET_AUTH_TOKEN
-} from "../actions/auth";
+const initialState = {
+  status: "",
+  error: "",
+
+  itineraries: [{
+    id: null,
+      title: null,
+      date_leave: null,
+      date_return: null,
+      travel: [null],
+      lodging: [null],
+      activity: [null],
+      public: false,
+      timestamp: null
+    }],
+      
+  author_of_snippets: [{
+    id: null,
+    title: null,
+    date_leave: null,
+    date_return: null,
+    timestamp: null
+  }]
+};
+
+
+
 
 // const initialState = {
-//   status: "",
-//   error: "",
-//   itineraries: [{
-//     id: null,
-//       title: null,
-//       date_leave: null,
-//       date_return: null,
-//       travel: [null],
-//       lodging: [null],
-//       activity: [null],
-//       public: false,
-//       timestamp: null
-//     }],
-      
+//  status: "",
+//  error: "",
+
+//  itineraries: 
+//   [{id: "5cd121b8b116ec454c107d0d",
+//     title: "Chicago",
+//     date_leave: "2019-04-03T04:00:00.000Z",
+//     date_return: "2019-05-18T04:00:00.000Z",
+//     travel: [],
+//     lodging: [],
+//     activity: [],
+//     public: false},
+//   {id: "677cd121b8b116545365765",
+//     title: "Philly",
+//     date_leave: "2019-04-03T04:00:00.000Z",
+//     date_return: "2019-05-18T04:00:00.000Z",
+//     travel: [],
+//     lodging: [],
+//     activity: [],
+//     public: false}],
+
 //   author_of_snippets: [{
-//     id: null,
-//     title: null,
-//     date_leave: null,
-//     date_return: null,
-//     timestamp: null
+//     id: "5cd121b8b116ec454c107d0d",
+//     title: "Chicago",
+//     date_leave: "2019-04-03T04:00:00.000Z",
+//     date_return: "2019-05-18T04:00:00.000Z",
+//     timestamp: "2019-05-18T04:00:00.000Z"
+//   },
+
+//   {
+//     id: "677cd121b8b116545365765",
+//     title: "Philly",
+//     date_leave: "2019-04-03T04:00:00.000Z",
+//     date_return: "2019-05-18T04:00:00.000Z",
+//     timestamp: "2019-05-18T04:00:00.000Z"
 //   }],
 
-//   auth: {
-//     authToken: null,
-//     currentUser: null
-//   }
 // };
-
-const initialState = {
- status: "",
- error: "",
-
- itineraries: 
-  [{id: "5cd121b8b116ec454c107d0d",
-    title: "Chicago",
-    date_leave: "2019-04-03T04:00:00.000Z",
-    date_return: "2019-05-18T04:00:00.000Z",
-    travel: [],
-    lodging: [],
-    activity: [],
-    public: false},
-  {id: "677cd121b8b116545365765",
-    title: "Philly",
-    date_leave: "2019-04-03T04:00:00.000Z",
-    date_return: "2019-05-18T04:00:00.000Z",
-    travel: [],
-    lodging: [],
-    activity: [],
-    public: false}],
-
-  author_of_snippets: [{
-    id: "5cd121b8b116ec454c107d0d",
-    title: "Chicago",
-    date_leave: "2019-04-03T04:00:00.000Z",
-    date_return: "2019-05-18T04:00:00.000Z",
-    timestamp: "2019-05-18T04:00:00.000Z"
-  },
-
-  {
-    id: "677cd121b8b116545365765",
-    title: "Philly",
-    date_leave: "2019-04-03T04:00:00.000Z",
-    date_return: "2019-05-18T04:00:00.000Z",
-    timestamp: "2019-05-18T04:00:00.000Z"
-  }],
-    authToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjZmY4NTljNGZjOTI0YjMwOTM4MzY3IiwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJsYXVyZW5AbGF1cmVuLmNvbSIsImF1dGhvcl9vZiI6W119LCJpYXQiOjE1NTcxMzM0MTgsImV4cCI6MTU1NzczODIxOCwic3ViIjoidGVzdCJ9.MasNjx8bqLTKeP7W4IYAnQvsY1fMtfIuIyXktQY1jNA',
-  currentUser: 'testuser'
-};
 
 function itinerator(state = initialState, action) {
   switch (action.type) {
@@ -104,15 +94,17 @@ function itinerator(state = initialState, action) {
       return failed;
     // fetch status = success reducers
     case FETCH_DB_SUCCESS:
+    let snippets = action.itinerarySnippets[0].map((snippet => snippet));
       let successful = Object.assign({}, state, {
         status: action.status,
-        author_of_snippets: action.itinerarySnippets
+        author_of_snippets: snippets
       });
       return successful;
     case FETCH_ITINERARY_SUCCESS:
+    console.log('reducer: fetchitin', action.itinerary.title)
       successful = Object.assign({}, state, {
         status: action.status,
-        itinerary: action.item
+        itineraries: action.itinerary
       });
       return successful;
     case POST_ITINERARY_SUCCESS:
@@ -149,32 +141,6 @@ function itinerator(state = initialState, action) {
       )}
       });
       return successful;
-    // authorization
-    case SET_AUTH_TOKEN:
-      return Object.assign({}, state, {
-        authToken: action.authToken
-      });
-    case CLEAR_AUTH:
-      return Object.assign({}, state, {
-        authToken: null,
-        currentUser: null
-      });
-    case AUTH_REQUEST:
-      return Object.assign({}, state, {
-        loading: true,
-        error: null
-      });
-    case AUTH_ERROR:
-      return Object.assign({}, state, {
-        loading: false,
-        error: action.error
-      });
-    case AUTH_SUCCESS: {
-      return Object.assign({}, state, {
-        loading: false,
-        currentUser: action.currentUser
-      });
-    }
     default:
       return state;
   }

@@ -1,15 +1,15 @@
 import React from "react";
 import "./App.css";
 import { connect } from "react-redux";
-import { Route, withRouter } from "react-router-dom";
+import { Route, withRouter, Switch } from "react-router-dom";
 import { refreshAuthToken } from "../redux/actions/auth";
 import LandingPage from "./landing-page";
-import store from "../redux/store";
 import Login from "./login-page";
 import CreateItinerary from "./display/create";
 import Registration from "./registration-page";
 import Dashboard from "./dashboard";
-import ViewItinerary from './display/view'
+import ViewItineraryPage from './display/view'
+import About from './about';
 
 export class App extends React.Component {
   componentDidUpdate(prevProps) {
@@ -41,30 +41,28 @@ export class App extends React.Component {
     clearInterval(this.refreshInterval);
   }
   render() {
-    console.log("app inside render", store.getState());
     return (
       <div className="container-app">
-        {this.props.loggedIn && this.props.hasAuthToken !== null ? (
-          <Dashboard store={store} />
-        ) : (
-          <LandingPage />
-        )}
+      <LandingPage />
+        <Switch>
         <Route exact path="/login" component={Login} />
-
-        <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/register" component={Registration} />
         <Route exact path="/create" component={CreateItinerary} />
-        <Route exact path="/view/:id" component={ViewItinerary} />
+        <Route exact path="/view/:id" component={ViewItineraryPage} />
+        <Route exact path="/about" component={About} />
+        
+        </Switch>
       </div>
+      
     );
   }
 }
 
 const mapStateToProps = state => ({
-  // hasAuthToken: state.auth.authToken !== null,
-  // loggedIn: state.auth.currentUser !== null
+  hasAuthToken: state.auth.authToken !== null,
+  loggedIn: state.auth.currentUser !== null
 });
 
 export default withRouter(connect(mapStateToProps)(App));
 
-// Deal with update blocking - https://reacttraining.com/react-router/web/guides/dealing-with-update-blocking

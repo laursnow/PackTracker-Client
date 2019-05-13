@@ -69,14 +69,22 @@ export const editItemSuccess = (post, category, id) => ({
 
 // Fetching all itineraries to display snippet on user dashboard
 
-export const fetchDashboard = () => dispatch => {
+export const fetchDashboard = (id) => (dispatch, getState) => {
     dispatch(fetchRequest());
-    fetch(`${API_BASE_URL}/itinerary`).then(res => { 
+    console.log('fetch dashboard');
+    const authToken = getState().auth.authToken;
+    fetch(`${API_BASE_URL}/itinerary/db/${id}`,
+    {
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    }).then(res => { 
         if (!res.ok) {
             return Promise.reject(res.statusText);
         }
         return res.json();
     }).then(item => {
+        console.log('fetchdbsuccess', item)
         dispatch(fetchDbSuccess(item));
     }).catch(err => {
         dispatch(fetchFailure(err));
@@ -85,14 +93,21 @@ export const fetchDashboard = () => dispatch => {
 
 // Fetching one selected individual itinerary that the user wants to expand/interact with
 
-export const fetchItinerary = (id) => dispatch => {
+export const fetchItinerary = (id) => (dispatch, getState) => {
     dispatch(fetchRequest());
-    fetch(`${API_BASE_URL}/itinerary/${id}`).then(res => {
+    const authToken = getState().auth.authToken;
+    fetch(`${API_BASE_URL}/itinerary/${id}`,
+    {
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    }).then(res => {
         if (!res.ok) {
             return Promise.reject(res.statusText);
         }
         return res.json();
     }).then(item => {
+        console.log('fetchitin', item)
         dispatch(fetchItinerarySuccess(item));
     }).catch(err => {
         dispatch(fetchFailure(err));
@@ -100,12 +115,16 @@ export const fetchItinerary = (id) => dispatch => {
 };
 
 
-export const postItinerary = (post) => dispatch => {
+export const postItinerary = (post) => (dispatch, getState) => {
     dispatch(fetchRequest());
     console.log('postItinerary');
+    const authToken = getState().auth.authToken;
+    
     fetch(`${API_BASE_URL}/itinerary`, {
         method: "POST",
-        // headers:
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        },
         body: JSON.stringify(post)
     })
     .then(res => {

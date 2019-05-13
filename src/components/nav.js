@@ -1,29 +1,60 @@
 import React from "react";
 import "./App.css";
 import {
-  Link
+  Link, Redirect
 } from "react-router-dom";
-// import CreateItinerary from "./display/create";
-// import Registration from "./registration-page";
+import {connect} from 'react-redux';
+import {clearAuth} from '../redux/actions/auth';
+import {clearAuthToken} from '../redux/local-storage';
 
-class Nav extends React.Component {
+
+
+export class Nav extends React.Component {
+  // OnClick() {
+  //   this.props.dispatch(clearAuth());
+  //   clearAuthToken();
+  //   console.log('firing')
+  // }
+
+
+//   componentDidMount() {
+//     if (this.props.loggedIn == null) {
+//       return <Redirect to="/dashboard" />;
+//   }
+// }
   render() {
+// need to call clearAuthToken()
+    console.log('render',this.props.loggedIn);
     return (
-        <ul className="nav-links">
-          <li className="shadow">
+      <div className="item-nav">
+        <ul className="nav">
+          <li className="nav">
             <Link to="/create">Create New</Link>
           </li>
 
-          <li className="shadow">
+          <li className="nav">
             <Link to="/Dashboard">Dashboard</Link>
           </li>
 
-          <li className="shadow">
-            <Link to="/">Logout</Link>
+          <li className="nav" onClick={() => {
+            this.props.clearAuth();
+            clearAuthToken(); }}>
+          Log out
           </li>
         </ul>
+        </div>
     );
   }
 }
 
-export default Nav;
+
+const mapDispatchToProps =  {
+  clearAuth,
+  clearAuthToken
+}
+
+const mapStateToProps = state => ({
+  loggedIn: state.auth.currentUser
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);

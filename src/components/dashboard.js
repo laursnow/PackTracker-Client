@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import { fetchDashboard } from "../redux/actions";
 import Snippet from "./snippet";
 import Nav from './nav';
-import store from '../redux/store'
+import requiresLogin from './requires-login';
 import {
   Link
 } from "react-router-dom";
@@ -13,19 +13,8 @@ import {
 
 
 export class Dashboard extends React.Component {
-  // dispatchAction (id) {
-  //     switch (id) {
-  //       case "TRASH":
-  //         this.props.store.dispatch(deleteItinerary(this.props.id));
-  //         break;
-        //   case "EDIT":
-        // this.props.store.dispatch(editForm());
-        //   break;
-    //   }
-    // }
-  componentWillMount() {
-    // this.props.store.subscribe(this.forceUpdate.bind(this));
-    // this.props.store.dispatch(fetchDashboard()); 
+  componentDidMount() {
+    this.props.dispatch(fetchDashboard(this.props.user)); 
   }
 
   render() {
@@ -35,36 +24,25 @@ export class Dashboard extends React.Component {
 
     ))
     return (
-        <div className="dashboard">
-      <div className="nav">  
-          <Nav />
-               <div className="item-dashboard">
-            <h1 id="top" className="shadow">
-              <Link to="/">Itinerator</Link>
-            </h1>
-            <h2>Saved Itineraries</h2>
-            {snippets}
-          </div>
-          <br />
-          <Link to="./create"><i class="fas fa-plus"></i> Add New</Link>
-          </div>
+        <div className="item-dashboard">
+              <div className="nav">  
+      <Nav />
       </div>
+        <h2>{this.props.user}'s Saved Itineraries</h2>
+            {snippets}
+          <br />
+          <Link to="./create"><i className="fas fa-plus"><span className='bree-font'> Add New</span></i></Link>
+          </div>
     );
   }
 }
 const mapStateToProps = state => ({
-  snippets: state.itinerator.author_of_snippets
+  snippets: state.itinerator.author_of_snippets,
+  user: state.auth.currentUser
 });
 
-export default connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = {
+  fetchDashboard
+}
 
-// const mapStateToProps = state => {
-//   const {currentUser} = state.auth;
-//   return {
-//       username: state.auth.currentUser.username,
-//       name: `${currentUser.firstName} ${currentUser.lastName}`,
-//       protectedData: state.protectedData.data
-//   };
-// };
-
-// export default requiresLogin()(connect(mapStateToProps)(Dashboard));
+export default requiresLogin()(connect(mapStateToProps, mapDispatchToProps)(Dashboard));

@@ -7,14 +7,11 @@ import LoginForm from './forms/login-form'
 export class Login extends React.Component {
     render() {
         return (
-            <div className="Login">
-                <header>
-                    <h1><Link to="/">Itinerator</Link></h1>
-                </header>
+            <div className="item-auth">
                 <main>
-                    <h2>login. form component below</h2>
+                    <h2>Login</h2>
                     <LoginForm />
-                <Link to="/">Return to main</Link>
+                <Link to="/" className="up">Return to main</Link>
                 </main>
             </div>
         )

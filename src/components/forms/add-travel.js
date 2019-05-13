@@ -45,6 +45,7 @@ export class CreateTravelForm extends React.Component {
     
     return (
       <form
+      className="form"
       onSubmit={this.props.handleSubmit((values, dispatch) =>
           this.onSubmit(values, dispatch)
       )}>

@@ -42,6 +42,7 @@ export class CreateItineraryForm extends React.Component {
     
     return (
       <form
+      className="form"
       onSubmit={this.props.handleSubmit((values, dispatch) =>
           this.onSubmit(values, dispatch)
       )}>
@@ -74,23 +75,6 @@ export class CreateItineraryForm extends React.Component {
           component={datePicker}
           validate={[required]}
         />
-
-          {/* <Field
-            name="public"
-            label="Public"
-            value={true}
-            parse={val => val === "true"}
-          />{" "}
-          Public
-
-          <Field
-            name="private"
-            label="Private"
-            value={false}
-            parse={val => val === "true"}
-          />{" "}
-          Private */}
-
 
         <button
           type="submit"
