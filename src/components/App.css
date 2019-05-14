@@ -10,7 +10,7 @@ font-family: 'Pacifico', cursive; */
 
 html {
   height: 100%;
-  background: #818388 url("../images/background-itinerator-2.jpg");
+  background: #818388 url("../images/background-packApp-2.jpg");
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -91,6 +91,7 @@ h2 {
   position: relative;
   margin-top: 60%;
   text-align: center;
+  background-color: #929396;
 }
 
 
@@ -174,7 +175,6 @@ i:hover {
 
 .form {
   background-color: #f1e9db;
-  border: 1px solid #dfe0e2;
   color: black;
   padding: 20px;
   text-align: center;
@@ -200,8 +200,12 @@ button {
   color: black;
 }
 
-.nav:hover, .nav a:hover, .fas:hover, .fas a:hover {
+.fas:hover, .fas a:hover {
   color: white;
+}
+
+.nav:hover, .nav a:hover {
+  color: #818388;
 }
 
 .item-dashboard, .item-view {
@@ -211,6 +215,15 @@ button {
   width: 50%;
 }
 
+.item-create {
+  border: 1px solid #dfe0e2;
+  padding: 10px;
+}
+
 .itin-title {
   color: #f1e9db;
+}
+
+.view-list {
+  text-align: left;
 }

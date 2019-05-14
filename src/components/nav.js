@@ -10,21 +10,7 @@ import {clearAuthToken} from '../redux/local-storage';
 
 
 export class Nav extends React.Component {
-  // OnClick() {
-  //   this.props.dispatch(clearAuth());
-  //   clearAuthToken();
-  //   console.log('firing')
-  // }
-
-
-//   componentDidMount() {
-//     if (this.props.loggedIn == null) {
-//       return <Redirect to="/dashboard" />;
-//   }
-// }
   render() {
-// need to call clearAuthToken()
-    console.log('render',this.props.loggedIn);
     return (
       <div className="item-nav">
         <ul className="nav">
@@ -53,8 +39,6 @@ const mapDispatchToProps =  {
   clearAuthToken
 }
 
-const mapStateToProps = state => ({
-  loggedIn: state.auth.currentUser
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+
+export default connect(null, mapDispatchToProps)(Nav);

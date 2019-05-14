@@ -1,7 +1,7 @@
 import React from 'react';
 import "./App.css";
 import { connect } from 'react-redux';
-import { deleteItinerary } from '../redux/actions'
+import { deletePackList } from '../redux/actions'
 import {
   Link
 } from "react-router-dom";
@@ -49,7 +49,7 @@ export class Snippet extends React.Component {
             state: { index: this.props.index }
           }}>
           <i className="fas fa-edit" alt="Edit"><span className="bree-font"> View/Edit</span></i></Link>
-       <i onClick={() => this.props.deleteItinerary(this.props.id)} className="fas fa-trash" alt="Delete"><span className="bree-font"> Delete</span></i>
+       <i onClick={() => this.props.deletePackList(this.props.id)} className="fas fa-trash" alt="Delete"><span className="bree-font"> Delete</span></i>
         </div>
       )
     }
@@ -57,7 +57,7 @@ export class Snippet extends React.Component {
 
 
   const mapDispatchToProps =  {
-    deleteItinerary
+    deletePackList
   }
 
   

@@ -15,9 +15,11 @@ import {
 export class Dashboard extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchDashboard(this.props.user)); 
+    // how to not call this everytime?
   }
 
   render() {
+    console.log(this.props.user)
     const snippets = this.props.snippets.map((snippet, index) => ( <div className='container-snippet' key={index}>
     <Snippet index={index} {...snippet} />
     </div>
@@ -28,7 +30,7 @@ export class Dashboard extends React.Component {
               <div className="nav">  
       <Nav />
       </div>
-        <h2>{this.props.user}'s Saved Itineraries</h2>
+        <h2>{this.props.user}'s Saved Packing Lists</h2>
             {snippets}
           <br />
           <Link to="./create"><i className="fas fa-plus"><span className='bree-font'> Add New</span></i></Link>
@@ -37,8 +39,8 @@ export class Dashboard extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  snippets: state.itinerator.author_of_snippets,
-  user: state.auth.currentUser
+  snippets: state.packApp.packLists,
+  user: state.auth.currentUser.username
 });
 
 const mapDispatchToProps = {

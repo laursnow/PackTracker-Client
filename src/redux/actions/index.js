@@ -16,33 +16,26 @@ export const fetchFailure = (error) => ({
 // Success actions
 
 export const FETCH_DB_SUCCESS = "FETCH_DB_SUCCESS";
-export const fetchDbSuccess = (itinerarySnippets) => ({
+export const fetchDbSuccess = (packListSnippets) => ({
   type: FETCH_DB_SUCCESS,
   status: 'success',
-  itinerarySnippets
+  packListSnippets
 });
 
-export const FETCH_ITINERARY_SUCCESS = "FETCH_ITINERARY_SUCCESS";
-export const fetchItinerarySuccess = (itinerary) => ({
-  type: FETCH_ITINERARY_SUCCESS,
+export const FETCH_PACKLIST_SUCCESS = "FETCH_PACKLIST_SUCCESS";
+export const fetchPackListSuccess = (packList) => ({
+  type: FETCH_PACKLIST_SUCCESS,
   status: 'success',
-  itinerary
+  packList
 });
 
-export const POST_ITINERARY_SUCCESS = "POST_ITINERARY_SUCCESS";
-export const postItinerarySuccess = (post) => ({
-  type: POST_ITINERARY_SUCCESS,
+export const POST_PACKLIST_SUCCESS = "POST_PACKLIST_SUCCESS";
+export const postPackListSuccess = (post) => ({
+  type: POST_PACKLIST_SUCCESS,
   status: 'success',
   post
 });
 
-export const POST_ITEM_SUCCESS = "POST_ITEM_SUCCESS";
-export const postItemSuccess = (post, category) => ({
-  type: POST_ITEM_SUCCESS,
-  status: 'success',
-  post,
-  category
-});
 
 export const DELETE_SUCCESS = "DELETE_SUCCESS";
 export const deleteSuccess = (message) => ({
@@ -51,29 +44,28 @@ export const deleteSuccess = (message) => ({
   message
 });
 
-export const EDIT_ITINERARY_SUCCESS = "EDIT_ITINERARY_SUCCESS";
-export const editItinerarySuccess = (post) => ({
-  type: EDIT_ITINERARY_SUCCESS,
+export const EDIT_PACKLIST_SUCCESS = "EDIT_PACKLIST_SUCCESS";
+export const editPackListSuccess = (post) => ({
+  type: EDIT_PACKLIST_SUCCESS,
   status: 'success',
   post
 });
 
-export const EDIT_ITEM_SUCCESS = "EDIT_ITEM_SUCCESS";
-export const editItemSuccess = (post, category, id) => ({
-  type: EDIT_ITEM_SUCCESS,
-  status: 'success',
-  post,
-  category,
-  id
+export const ADD_CARD = 'ADD_CARD';
+export const addCard = (text, index) => ({
+    type: ADD_CARD,
+    text,
+    index
 });
 
-// Fetching all itineraries to display snippet on user dashboard
+
+// Fetching all packLists to display snippet on user dashboard
 
 export const fetchDashboard = (id) => (dispatch, getState) => {
     dispatch(fetchRequest());
     console.log('fetch dashboard');
     const authToken = getState().auth.authToken;
-    fetch(`${API_BASE_URL}/itinerary/db/${id}`,
+    fetch(`${API_BASE_URL}/packList/db/${id}`,
     {
         headers: {
             Authorization: `Bearer ${authToken}`
@@ -91,12 +83,13 @@ export const fetchDashboard = (id) => (dispatch, getState) => {
     });
 };
 
-// Fetching one selected individual itinerary that the user wants to expand/interact with
+// Fetching one selected individual packList that the user wants to expand/interact with
 
-export const fetchItinerary = (id) => (dispatch, getState) => {
+export const fetchPackList = (id) => (dispatch, getState) => {
     dispatch(fetchRequest());
     const authToken = getState().auth.authToken;
-    fetch(`${API_BASE_URL}/itinerary/${id}`,
+    console.log('fetchpack', id);
+    fetch(`${API_BASE_URL}/packList/${id}`,
     {
         headers: {
             Authorization: `Bearer ${authToken}`
@@ -108,19 +101,20 @@ export const fetchItinerary = (id) => (dispatch, getState) => {
         return res.json();
     }).then(item => {
         console.log('fetchitin', item)
-        dispatch(fetchItinerarySuccess(item));
+        dispatch(fetchPackListSuccess(item));
     }).catch(err => {
         dispatch(fetchFailure(err));
     });
 };
 
 
-export const postItinerary = (post) => (dispatch, getState) => {
+export const postPackList = (post) => (dispatch, getState) => {
     dispatch(fetchRequest());
-    console.log('postItinerary');
+    console.log('postPackList');
+    console.log(post);
     const authToken = getState().auth.authToken;
     
-    fetch(`${API_BASE_URL}/itinerary`, {
+    fetch(`${API_BASE_URL}/packList`, {
         method: "POST",
         headers: {
             Authorization: `Bearer ${authToken}`
@@ -133,54 +127,23 @@ export const postItinerary = (post) => (dispatch, getState) => {
         }
         return res.json();
     }).then(item => {
-        dispatch(postItinerarySuccess(item));
+        dispatch(postPackListSuccess(item));
     }).catch(err => {
         dispatch(fetchFailure(err));
     });
 };
 
-      // .then(res => {
-      //   if (!res.ok) {
-      //     if (
-      //       res.headers.has("content-type") &&
-      //       res.headers.get("content-type").startsWith("application/json")
-      //     ) {
-      //       // It's a nice JSON error returned by us, so decode it
-      //       return res.json().then(err => Promise.reject(err));
-      //     }
-      //     // It's a less informative error returned by express
-      //     return Promise.reject({
-      //       code: res.status,
-      //       message: res.statusText
-      //     });
-      //   }
-      //   return;
-      // })
-      // .then(() => console.log("Submitted with values", values))
-      // .catch(err => {
-      //   const { reason, message, location } = err;
-      //   if (reason === "ValidationError") {
-      //     // Convert ValidationErrors into SubmissionErrors for Redux Form
-      //     return Promise.reject(
-      //       new SubmissionError({
-      //         [location]: message
-      //       })
-      //     );
-      //   }
-      //   return Promise.reject(
-      //     new SubmissionError({
-      //       _error: "Error submitting message"
-      //     })
-      //   );
-      // });
 
 
-export const deleteItinerary = (id) => dispatch => {
-    console.log('deleteitinerary firiing', id, `${API_BASE_URL}/itinerary/${id}`)
+export const deletePackList = (id) => (dispatch, getState) => {
+    console.log('deletepackList firiing', id, `${API_BASE_URL}/packList/${id}`)
     dispatch(fetchRequest());
-    fetch(`${API_BASE_URL}/itinerary/${id}`, {
+    const authToken = getState().auth.authToken;
+    fetch(`${API_BASE_URL}/packList/${id}`, {
         method: "DELETE",
-        // headers:
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
     })
     .then(res => {
         if (!res.ok) {
@@ -194,11 +157,15 @@ export const deleteItinerary = (id) => dispatch => {
     });
 };
 
-export const editItinerary = (id, post) => dispatch => {
+export const editPackList = (id, post) => (dispatch, getState) => {
     dispatch(fetchRequest());
-    fetch(`${API_BASE_URL}/itinerary/${id}`, {
+    console.log('update firing', post, id)
+    const authToken = getState().auth.authToken;
+    fetch(`${API_BASE_URL}/packList/${id}`, {
         method: "PUT",
-        // headers:
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        },
         body: JSON.stringify(post)
     })
     .then(res => {
@@ -207,64 +174,7 @@ export const editItinerary = (id, post) => dispatch => {
         }
         return res.json();
     }).then(item => {
-        dispatch(editItinerarySuccess(item));
-    }).catch(err => {
-        dispatch(fetchFailure(err));
-    });
-};
-
-export const deleteItem = (id, category) => dispatch => {
-    dispatch(fetchRequest());
-    fetch(`${API_BASE_URL}/${category}/${id}`, {
-        method: "DELETE",
-        // headers:
-    })
-    .then(res => {
-        if (!res.ok) {
-            return Promise.reject(res.statusText);
-        }
-        return res.json();
-    }).then(item => {
-        dispatch(deleteSuccess('Deletion successful.'));
-    }).catch(err => {
-        dispatch(fetchFailure(err));
-    });
-};
-
-export const postItem = (post, category) => dispatch => {
-    console.log('postItem', `${API_BASE_URL}/${category}`);
-    dispatch(fetchRequest());
-    fetch(`${API_BASE_URL}/${category}`, {
-        method: "POST",
-        // headers:
-        body: JSON.stringify(post)
-    })
-    .then(res => {
-        if (!res.ok) {
-            return Promise.reject(res.statusText);
-        }
-        return res.json();
-    }).then(item => {
-        dispatch(postItemSuccess(item, category));
-    }).catch(err => {
-        dispatch(fetchFailure(err));
-    });
-};
-
-export const editItem = (id, category, post) => dispatch => {
-    dispatch(fetchRequest());
-    fetch(`${API_BASE_URL}/${category}/${id}`, {
-        method: "PUT",
-        // headers:
-        body: JSON.stringify(post)
-    })
-    .then(res => {
-        if (!res.ok) {
-            return Promise.reject(res.statusText);
-        }
-        return res.json();
-    }).then(item => {
-        dispatch(editItemSuccess(item, category, id));
+        dispatch(editPackListSuccess(item));
     }).catch(err => {
         dispatch(fetchFailure(err));
     });

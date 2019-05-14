@@ -1,7 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-
-export default class ImageInput extends React.Component {
+export default class InputItem extends React.Component {
     componentDidUpdate(prevProps) {
         if (!prevProps.meta.active && this.props.meta.active) {
             this.input.focus();
@@ -30,14 +29,11 @@ export default class ImageInput extends React.Component {
                     {warning}
                 </label>
                 <Element
-                    {...this.props.input}
                     id={this.props.input.name}
-                    type='file'
-                    accept='.jpg, .png, .jpeg'
+                    type={this.props.type}
                     ref={input => (this.input = input)}
                 />
             </div>
         );
     }
 }
-

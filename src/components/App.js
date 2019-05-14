@@ -5,10 +5,10 @@ import { Route, withRouter, Switch } from "react-router-dom";
 import { refreshAuthToken } from "../redux/actions/auth";
 import LandingPage from "./landing-page";
 import Login from "./login-page";
-import CreateItinerary from "./display/create";
+import CreatePackList from "./display/create";
 import Registration from "./registration-page";
 import Dashboard from "./dashboard";
-import ViewItineraryPage from './display/view'
+import ViewPackListPage from './display/view'
 import About from './about';
 
 export class App extends React.Component {
@@ -48,8 +48,8 @@ export class App extends React.Component {
         <Route exact path="/login" component={Login} />
           <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/register" component={Registration} />
-        <Route exact path="/create" component={CreateItinerary} />
-        <Route exact path="/view/:id" component={ViewItineraryPage} />
+        <Route exact path="/create" component={CreatePackList} />
+        <Route exact path="/view/:id" component={ViewPackListPage} />
         <Route exact path="/about" component={About} />
         
         </Switch>

@@ -14,10 +14,10 @@ export class LandingPage extends React.Component {
             <div className="item-landing-1">
             <div className="item-title">
               <h1 id="top" className="shadow">
-                Itinerator
+                TrackPack
               </h1>
               <h3 className="shadow">
-                A simple web app for building travel itineraries
+                A simple web app for tracking trip packing
               </h3>
               </div></div>
               <div className="item-landing-2">
