@@ -1,13 +1,9 @@
 import React from "react";
 import "./App.css";
-import {
-  Link, Redirect
-} from "react-router-dom";
-import {connect} from 'react-redux';
-import {clearAuth} from '../redux/actions/auth';
-import {clearAuthToken} from '../redux/local-storage';
-
-
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { clearAuth } from "../redux/actions/auth";
+import { clearAuthToken } from "../redux/local-storage";
 
 export class Nav extends React.Component {
   render() {
@@ -22,23 +18,27 @@ export class Nav extends React.Component {
             <Link to="/Dashboard">Dashboard</Link>
           </li>
 
-          <li className="nav" onClick={() => {
-            this.props.clearAuth();
-            clearAuthToken(); }}>
-          Log out
+          <li
+            className="nav logout"
+            onClick={() => {
+              this.props.clearAuth();
+              clearAuthToken();
+            }}
+          >
+            Log out
           </li>
         </ul>
-        </div>
+      </div>
     );
   }
 }
 
-
-const mapDispatchToProps =  {
+const mapDispatchToProps = {
   clearAuth,
   clearAuthToken
-}
+};
 
-
-
-export default connect(null, mapDispatchToProps)(Nav);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Nav);

@@ -2,59 +2,26 @@ import {
   FETCH_FAILURE,
   FETCH_REQUEST,
   FETCH_DB_SUCCESS,
-  FETCH_PACKLIST_SUCCESS,
   POST_PACKLIST_SUCCESS,
   DELETE_SUCCESS,
-  EDIT_PACKLIST_SUCCESS,
-  ADD_CARD,
+  ADD,
+  REMOVE,
+  STRIKEOUT,
+  FETCH_PACKLIST_SUCCESS,
+  EDIT_PACKLIST_SUCCESS
 } from "../actions";
 
 const initialState = {
   status: "",
   error: "",
 
-  packLists: [{ 
-    title: null,
-    date_leave: null,
-    date_return: null,
-    list: [null],
-    timestamp: null
-  }],
+  packLists: [{}],
 
-  currentView: {
-    title: null,
-    date_leave: null,
-    date_return: null,
-    list: [null],
-    timestamp: null
-  }
+  currentData: null
 };
-
-
-// const initialState = {
-//   status: "",
-//   error: "",
-
-//   packLists: [{ 
-//     title: 'Chicago',
-//     date_leave: '06/01/19',
-//     date_return: '06/03/2019',
-//     list: ['Sneakers', 'Phone Charger'],
-//     timestamp: '5/14/19'
-//   },
-//   {
-//   title: 'Brooklyn',
-//   date_leave: '06/15/19',
-//   date_return: '06/16/19',
-//   list: ['Wallet', 'Toothbrush'],
-//   timestamp: '5/14/19'
-// }]
-// };
-
 
 function packApp(state = initialState, action) {
   switch (action.type) {
-
     case FETCH_REQUEST:
       const requested = Object.assign({}, state, {
         status: action.status
@@ -64,63 +31,74 @@ function packApp(state = initialState, action) {
     case FETCH_FAILURE:
       const failed = Object.assign({}, state, {
         status: action.status,
-        error: action.error
+        error: action.error.message
       });
       return failed;
 
     case FETCH_DB_SUCCESS:
-    let snippets = action.packListSnippets[0].map((snippet => snippet));
+      let snippets = action.packListSnippets[0].map(snippet => snippet);
       let successful = Object.assign({}, state, {
         status: action.status,
         packLists: snippets
       });
       return successful;
 
-    case FETCH_PACKLIST_SUCCESS:
-    console.log('reducer: fetchitin', action.packList.title)
-      successful = Object.assign({}, state, {
-        status: action.status,
-        currentView: action.packList
-      });
-      return successful;
-
     case POST_PACKLIST_SUCCESS:
-      successful = Object.assign({}, state, {
+      let successfulPost = Object.assign({}, state, {
         status: action.status,
-        packList: action.post
+        packLists: action.post
       });
-      return successful;
+      return successfulPost;
 
     case DELETE_SUCCESS:
-      successful = Object.assign({}, state, {
+      let successfulDeletion = Object.assign({}, state, {
         status: action.status,
         message: action.message
       });
 
-      return successful;
+      return successfulDeletion;
 
-      case EDIT_PACKLIST_SUCCESS:
-      successful = Object.assign({}, state, {
+    case FETCH_PACKLIST_SUCCESS:
+      let successfulPackList = Object.assign({}, state, {
         status: action.status,
-        packList: action.packList
+        currentData: action.viewOne
       });
-      return successful;
-      
-      case ADD_CARD:
-        let cards = state.lists.cards.map((card, index) => {
-            if (index !== action.index) {
-                return card;
-            }
-            return Object.assign({}, card, {
-                cards: [...cards, {
-                    text: action.text
-                }]
-            });
-        });
+      return successfulPackList;
 
-        return Object.assign({}, state, {
-            cards
-        });
+    case EDIT_PACKLIST_SUCCESS:
+      let successfulEdit = Object.assign({}, state, {
+        status: action.status,
+        currentData: action.packList
+      });
+      return successfulEdit;
+
+    case ADD:
+      let newObj = action.values.map(newItem => ({ pack_item: newItem }));
+      const add = Object.assign({}, state.currentData, {
+        pack: newObj
+      });
+      return add;
+
+    case REMOVE:
+    console.log('REMOVE firing', action);
+    let remove = Object.assign({}, state);
+    remove.currentData.pack.splice(action.index, 1);
+    console.log(state, remove);
+    return remove;
+
+    case STRIKEOUT:
+    console.log('STRIKE firing', action);
+    let strike = Object.assign({}, state);
+      if (action.toggle === true) {
+        strike.currentData.pack[action.index]["complete"] = false;
+        return strike;
+      } else {
+        strike.currentData.pack[action.index]["complete"] = true;
+        console.log(state, strike);
+        return strike;
+      }
+
+    
 
     default:
       return state;
@@ -128,5 +106,3 @@ function packApp(state = initialState, action) {
 }
 
 export default packApp;
-
-

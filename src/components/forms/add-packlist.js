@@ -1,60 +1,78 @@
 import React from "react";
 import { reduxForm, Field, focus, FieldArray } from "redux-form";
 import Input from "./input";
-import InputItem from "./inputitem";
-import { required, nonEmpty } from "./validators";
+import { required } from "./validators";
 import { postPackList } from "../../redux/actions";
-import DateTimePicker from "react-widgets/lib/DateTimePicker";
+import DatePicker from "react-widgets/lib/DateTimePicker";
 import momentLocalizer from "react-widgets-moment";
-import moment from 'moment';
+import moment from "moment";
 import "../App.css";
+import "../calendar/calendar.css";
 
 momentLocalizer(moment);
 
-
 export class CreatePackListForm extends React.Component {
-    onSubmit(values, dispatch) {
+  onSubmit(values, dispatch) {
     return dispatch(postPackList(values));
   }
 
-  render() {  
+  render() {
+    const styleButton = {
+      fontSize: "16px",
+      textAlign: "center"
+    };
 
-    const listItem = ({ fields, meta: { touched, error } }) => (
-      <ul>
-        <li>
-          <button type="button" onClick={() => fields.push({})}>Add Item</button>
+    const stylePadding = {
+      paddingTop: "10px"
+    };
+
+    const renderField = ({ input, label, type, meta: { touched, error } }) => (
+      <div>
+        <label>{label}</label>
+        <div>
+          <input {...input} type={type} placeholder={label} />
           {touched && error && <span>{error}</span>}
-        </li>
-        {fields.map((item, index) =>
-          <li key={index}>
-            <button
-              type="button"
-              title="Remove Item"
-              onClick={() => fields.remove(index)}/>
-              <label htmlFor="date-leave">{index + 1}. </label>
-            <Field
-              name="item"
-              type="text"
-              component={InputItem}
+        </div>
+      </div>
+    );
+
+    const renderItem = ({ fields, meta: { error } }) => (
+      <div>
+        <i className="fas fa-plus item-fields" onClick={() => fields.push({})}>
+          <span className="bree-font">Add Item</span>
+        </i>
+        <ul className=".item-fields-flex" style={stylePadding}>
+          {fields.map((pack, index) => (
+            <li key={index}>
+              <Field
+                name={`${pack}.pack_item`}
+                type="text"
+                component={renderField}
+              />{" "}
+              <i
+                className="fas fa-trash"
+                onClick={() => fields.remove(index)}
               />
-          </li>
-        )}
-      </ul>
-    )
+            </li>
+          ))}
+          {error && <li className="error">{error}</li>}
+        </ul>
+      </div>
+    );
+
     const datePicker = ({ input: { onChange, value }, showTime }) => (
-      <DateTimePicker
+      <DatePicker
         onChange={onChange}
         format="DD MMM YYYY"
         time={showTime}
         value={!value ? null : new Date(value)}
       />
     );
+
     let successMessage;
     if (this.props.submitSucceeded) {
       successMessage = (
-        <div className="message message-success">
-          New itinerary saved!
-        </div>
+        <div className="message message-success">New list saved!</div>
       );
     }
 
@@ -64,17 +82,19 @@ export class CreatePackListForm extends React.Component {
         <div className="message message-error">{this.props.error}</div>
       );
     }
-    
+
     return (
       <form
-      className="form"
-      onSubmit={this.props.handleSubmit((values, dispatch) =>
+        className="add-form"
+        onSubmit={this.props.handleSubmit((values, dispatch) =>
           this.onSubmit(values, dispatch)
-      )}>
-        {successMessage}
-        {errorMessage}
+        )}
+      >
+        <p style={{ color: "black", fontSize: "30px" }}>
+          {successMessage}
+          {errorMessage}
+        </p>
 
-        
         <label htmlFor="title">Trip title</label>
         <Field
           name="title"
@@ -83,29 +103,26 @@ export class CreatePackListForm extends React.Component {
           validate={[required]}
         />
 
-        
-<label htmlFor="date-leave">Leave date</label>
+        <label htmlFor="date_leave">Leave date</label>
         <Field
-          name="date-leave"
-          showTime={false}
-          component={datePicker}
-          validate={[required]}
-        />
-        
-
-        <label htmlFor="date-return">Return date</label>
-          <Field
-          name="date-return"
+          name="date_leave"
           showTime={false}
           component={datePicker}
           validate={[required]}
         />
 
-        <FieldArray 
-        name="item" 
-        component={listItem}/>
+        <label htmlFor="date_return">Return date</label>
+        <Field
+          name="date_return"
+          showTime={false}
+          component={datePicker}
+          validate={[required]}
+        />
+
+        <FieldArray name="pack" component={renderItem} />
 
         <button
+          style={styleButton}
           type="submit"
           disabled={this.props.pristine || this.props.submitting}
         >
@@ -121,5 +138,3 @@ export default reduxForm({
   onSubmitFail: (errors, dispatch) =>
     dispatch(focus("contact", Object.keys(errors)[0]))
 })(CreatePackListForm);
-
-

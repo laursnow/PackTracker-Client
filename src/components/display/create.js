@@ -1,26 +1,49 @@
 import React from "react";
 import "../App.css";
-import { BrowserRouter as Link } from "react-router-dom";
-import CreatePackListForm from "../forms/add-packlist"
+import { Link } from "react-router-dom";
+import CreatePackListForm from "../forms/add-packlist";
 import Nav from "../nav";
 import { connect } from "react-redux";
 import requiresLogin from "../requires-login";
+import ErrorComponent from "../error";
+import Loader from "../loader";
+
+// Component to render form that creates a packing list
 
 class CreatePackList extends React.Component {
   render() {
-    return (
-      <div className="item-create">
-        <div className="nav">
-          <Nav />
-        </div>
-        <h2>Create New Packing List</h2>
-        <CreatePackListForm/>
-        <Link to="/dashboard">Return to dashboard</Link>
-      </div>
-    );
+    if (this.props.status === "loading" || this.props.statusAuth === true) {
+      return <Loader />;
+    }
+
+    if (
+      this.props.status === "error" ||
+      this.props.statusAuth === "error" ||
+      this.props.status == null
+    ) {
+      return <ErrorComponent />;
+    }
+
+      return (
+        <div className="item-create">
+          <div className="nav">
+            <Nav />
+          </div>
+          <h2>Create New Packing List</h2>
+            <CreatePackListForm />
+            <Link to="/dashboard">
+              <i className="fas fa-home">
+                <span className="bree-font"> Return to dashboard</span>
+              </i>
+            </Link>
+          </div>
+      );
+    }
   }
-}
 
+const mapStateToProps = state => ({
+  status: state.packApp.status,
+  statusAuth: state.auth.status
+});
 
-
-export default requiresLogin()(connect()(CreatePackList));
+export default requiresLogin()(connect(mapStateToProps)(CreatePackList));
