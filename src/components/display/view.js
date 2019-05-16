@@ -15,7 +15,7 @@ import Nav from "../nav";
 import Loader from "../loader";
 import ErrorComponent from "../error";
 import ListItem from "./listitem";
-import AddListItemForm from "./add-listitemform";
+import AddListItemForm from "../forms/add-listitemform";
 
 // Renders component for view/interacting with existing lists further
 
@@ -24,11 +24,6 @@ export class ViewPackListPage extends React.Component {
     const { id } = this.props.match.params;
     this.props.dispatch(fetchPackList(id));
   }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return this.props.updateData !== null && 
-  //   state !== nextState.updateData
-  // }
 
   render() {
     if (this.props.status === "loading" || this.props.updateData === null) {
@@ -41,21 +36,10 @@ export class ViewPackListPage extends React.Component {
       this.props.status == null
     ) {
       return <ErrorComponent />;
-    }
-    else {
-
+    } else {
       const { id } = this.props.match.params;
-      const { index } = this.props.location.state;
-      let currentIndex = index;
       const list = this.props.updateData;
-      console.log(
-        this.props,
-        "current props",
-        currentIndex,
-        "index, ",
-        this.props.updateData,
-        "update"
-      );
+
       let datesFormatted = {}; // Date formatting functions below
       let dateObj = {
         date_leave: list.date_leave,
@@ -88,11 +72,13 @@ export class ViewPackListPage extends React.Component {
       }
       makeDates(dateObj);
 
-      const packListItems = this.props.updateData.pack.map((packListItem, index) => (
-        <ul className="container-list-items" key={index}>
-          <ListItem index={index} {...packListItem} />
-        </ul>
-      ));
+      const packListItems = this.props.updateData.pack.map(
+        (packListItem, index) => (
+          <ul className="container-list-items" key={index}>
+            <ListItem index={index} {...packListItem} />
+          </ul>
+        )
+      );
       const styleButton = {
         fontSize: "16px",
         textAlign: "center"

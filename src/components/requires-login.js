@@ -16,7 +16,7 @@ export default () => Component => {
         </div>
       );
     } else if (!loggedIn || error) {
-      return <Redirect to="/" />;
+      return <Redirect to="/#up" />;
     }
 
     return <Component {...passThroughProps} />;

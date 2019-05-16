@@ -10,7 +10,7 @@ export class About extends React.Component {
         <div className="item-auth">
            <h2>TrackPack: Travel Better.</h2>
            <p>App info/screenshots</p>
-              <HashLink to="/#top" className="up">Back to top</HashLink>
+              <HashLink to="/#up" className="up">Back to top</HashLink>
             </div> 
 
       );

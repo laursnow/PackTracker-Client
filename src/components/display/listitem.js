@@ -6,6 +6,9 @@ import { strikeout, remove } from "../../redux/actions";
 // Renders existing child component list items for user interaction
 
 export class ListItem extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props !== nextProps;
+  }
   render() {
     return (
       <li

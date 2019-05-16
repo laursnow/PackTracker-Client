@@ -1,8 +1,13 @@
 import React from "react";
 import "../App.css";
+import { add } from "../../redux/actions";
 import { reduxForm, Field, FieldArray } from "redux-form";
 
 export class AddListItemForm extends React.Component {
+  onSubmit(values, dispatch) {
+    return dispatch(add(values));
+  }
+
   render() {
     const styleButton = {
       fontSize: "16px",
@@ -26,7 +31,12 @@ export class AddListItemForm extends React.Component {
     const renderItem = ({ fields, meta: { error } }) => (
       <div>
         <i className="fas fa-plus item-fields" onClick={() => fields.push({})}>
-          <span className="bree-font">Add Item</span>
+          <span
+            className="bree-font"
+            style={{ color: "black", fontSize: "20px" }}
+          >
+            Add Item
+          </span>
         </i>
         <ul className=".item-fields-flex" style={stylePadding}>
           {fields.map((pack, index) => (
@@ -46,6 +56,19 @@ export class AddListItemForm extends React.Component {
         </ul>
       </div>
     );
+    let successMessage;
+    if (this.props.submitSucceeded) {
+      successMessage = (
+        <div className="message message-success">Items added!</div>
+      );
+    }
+
+    let errorMessage;
+    if (this.props.error) {
+      errorMessage = (
+        <div className="message message-error">{this.props.error}</div>
+      );
+    }
     return (
       <form
         className="edit-form"
@@ -53,6 +76,9 @@ export class AddListItemForm extends React.Component {
           this.onSubmit(values, dispatch)
         )}
       >
+        {successMessage}
+        {errorMessage}
+
         <FieldArray name="pack" component={renderItem} />
 
         <button
@@ -60,7 +86,6 @@ export class AddListItemForm extends React.Component {
           type="submit"
           disabled={this.props.pristine || this.props.submitting}
         >
-          {" "}
           Add New Items
         </button>
       </form>
@@ -69,6 +94,6 @@ export class AddListItemForm extends React.Component {
 }
 
 export default reduxForm({
-  form: "_toUpdateList",
-  onSubmitFail: (errors, dispatch) => dispatch(Object.keys(errors)[0])
+  form: "_toUpdateList"
+  // onSubmitFail: (errors, dispatch) => dispatch(Object.keys(errors)[0])
 })(AddListItemForm);

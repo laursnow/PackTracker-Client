@@ -73,32 +73,27 @@ function packApp(state = initialState, action) {
       return successfulEdit;
 
     case ADD:
-      let newObj = action.values.map(newItem => ({ pack_item: newItem }));
-      const add = Object.assign({}, state.currentData, {
-        pack: newObj
-      });
+      let newObj = action.values.pack.map(pack => pack );
+      const add = Object.assign({}, state);
+      console.log(newObj, add);
       return add;
 
     case REMOVE:
-    console.log('REMOVE firing', action);
     let remove = Object.assign({}, state);
-    remove.currentData.pack.splice(action.index, 1);
-    console.log(state, remove);
-    return remove;
+    let removeObj = JSON.parse(JSON.stringify(remove));
+    removeObj.currentData.pack.splice(action.index, 1);
+    return removeObj;
 
     case STRIKEOUT:
-    console.log('STRIKE firing', action);
     let strike = Object.assign({}, state);
+    let strikeObj = JSON.parse(JSON.stringify(strike));
       if (action.toggle === true) {
-        strike.currentData.pack[action.index]["complete"] = false;
-        return strike;
+        strikeObj.currentData.pack[action.index]["complete"] = false;
+        return strikeObj;
       } else {
-        strike.currentData.pack[action.index]["complete"] = true;
-        console.log(state, strike);
-        return strike;
+        strikeObj.currentData.pack[action.index]["complete"] = true;
+        return strikeObj;
       }
-
-    
 
     default:
       return state;

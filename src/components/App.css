@@ -8,10 +8,14 @@ font-family: 'Pacifico', cursive; */
   font-weight: normal;
 }
 
+#root {
+  margin: 0px;
+  padding: 0px;
+}
+
 html {
   height: 100%;
   background: #818388 url("../images/background-packApp-2.jpg");
-  height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -114,6 +118,7 @@ h5 {
   margin-top: 900px;
   text-align: center;
   background-color: #929396;
+  width: 85%
 }
 
 .item-auth {
@@ -320,4 +325,97 @@ input {
   background-color: #dfe0e2;
   padding: 100px;
   color: black;
+}
+
+@media only screen and (max-width: 1082px) {
+  .nav li {
+    padding: 2px;
+    font-size: 23px;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 797px) {
+  html {
+    background: #818388 url("../images/background-itinerator.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .container-app,
+  .container-app-2,
+  .container-app-3 {
+    display: flex;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    align-content: space-around;
+    -webkit-align-items: space-around;
+    padding: 0px;
+    margin: 5px;
+  }
+
+  .item-landing-1,
+  .item-landing-2 {
+    padding: 10px 20px 10px 20px;
+    position: relative;
+    margin: 0px;
+    width: 100%;
+    text-align: center;
+    background-color: none;
+  }
+
+  h1 {
+    font-size: 60px;
+    text-align: center;
+  }
+  h3 {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .item-landing-1 {
+    opacity: 0.9;
+    line-height: normal;
+  }
+
+  .item-title {
+    text-align: right;
+  }
+
+  .item-auth,
+  .item-dashboard,
+  .item-create,
+  .item-view {
+    position: relative;
+    top: 0px;
+    text-align: center;
+    background-color: #929396;
+    box-shadow: 2px 2px 6px #3b3c3f;
+    border: 1px solid #dfe0e2;
+    padding: 10px;
+    margin: 10px;
+    width: 95%;
+  }
+
+  .landing-links li {
+    font-size: 26px;
+    color: white;
+  }
+
+  h2 {
+    font-size: 36px;
+  }
+
+  p {
+    font-size: 22px;
+  }
+} 
+
+@media only screen and (max-width: 572px) {
+  .nav li {
+    display: block;
+    padding: 2px;
+    font-size: 20px;
+  }
 }

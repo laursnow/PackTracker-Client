@@ -90,7 +90,6 @@ export const fetchDashboard = id => (dispatch, getState) => {
       return res.json();
     })
     .then(item => {
-      console.log("fetchdbsuccess", item);
       dispatch(fetchDbSuccess(item));
     })
     .catch(err => {

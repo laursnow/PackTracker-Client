@@ -35,7 +35,10 @@ export class Dashboard extends React.Component {
     const snippets = this.props.snippets.map((snippet, index) => (
       <div className="container-snippet" key={index}>
         <Snippet index={index} {...snippet} />
+        
       </div>
+      
+      
     ));
     return (
       <div className="item-dashboard">
