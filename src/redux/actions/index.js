@@ -171,7 +171,7 @@ export const deletePackList = id => (dispatch, getState) => {
     });
 };
 
-export const editPackList = (id, post) => (dispatch, getState) => {
+export const editPackList = (post, id) => (dispatch, getState) => {
   dispatch(fetchRequest());
   console.log("update firing", post, id);
   const authToken = getState().auth.authToken;

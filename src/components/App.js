@@ -42,7 +42,9 @@ export class App extends React.Component {
   render() {
     return (
       <div className="container-app" id="#up">
+                  <LandingPage />
         <Switch>
+
           <Scroll>
             <Route exact path="/login" component={Login} />
             <Route exact path="/dashboard" component={Dashboard} />

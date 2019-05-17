@@ -73,10 +73,13 @@ function packApp(state = initialState, action) {
       return successfulEdit;
 
     case ADD:
-      let newObj = action.values.pack.map(pack => pack );
-      const add = Object.assign({}, state);
-      console.log(newObj, add);
-      return add;
+      action.values.pack.forEach(item => state.currentData.pack.push(item))
+      // state.currentData.pack.push(action.values.pack);
+      // let newObj = action.values.pack.map(pack => pack );
+      console.log(action.values, 'actionvalues', state);
+      // const add = Object.assign({}, state);
+
+      return state;
 
     case REMOVE:
     let remove = Object.assign({}, state);

@@ -39,6 +39,7 @@ export class ViewPackListPage extends React.Component {
     } else {
       const { id } = this.props.match.params;
       const list = this.props.updateData;
+      console.log(id, 'ID!!!')
 
       let datesFormatted = {}; // Date formatting functions below
       let dateObj = {
