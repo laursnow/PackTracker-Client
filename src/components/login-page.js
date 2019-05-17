@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { connect } from "react-redux";
 import { HashLink } from 'react-router-hash-link';
-import { Link, withRouter, Redirect } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import LoginForm from "./forms/login-form";
 import ErrorComponent from "./error";
 import Loader from "./loader";

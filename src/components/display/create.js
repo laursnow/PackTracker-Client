@@ -1,9 +1,10 @@
 import React from "react";
 import "../App.css";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
 import CreatePackListForm from "../forms/add-packlist";
 import Nav from "../nav";
-import { connect } from "react-redux";
+
 import requiresLogin from "../requires-login";
 import ErrorComponent from "../error";
 import Loader from "../loader";
@@ -46,4 +47,4 @@ const mapStateToProps = state => ({
   statusAuth: state.auth.status
 });
 
-export default requiresLogin()(connect(mapStateToProps)(CreatePackList));
+export default requiresLogin()(withRouter(connect(mapStateToProps)(CreatePackList)));

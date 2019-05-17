@@ -37,16 +37,20 @@ function packApp(state = initialState, action) {
 
     case FETCH_DB_SUCCESS:
       let snippets = action.packListSnippets[0].map(snippet => snippet);
-      let successful = Object.assign({}, state, {
-        status: action.status,
+      let successful = Object.assign({}, state)
+      let successfulNext = JSON.parse(JSON.stringify(successful));
+      let successfulNextTwo = Object.assign({}, successfulNext, {
         packLists: snippets
       });
-      return successful;
+      let updatedSuccessful = Object.assign({}, successfulNextTwo, {
+        status: action.status,
+      })
+      // console.log(updatedSuccessful, '@@@@', state, '^^^^')
+      return updatedSuccessful;
 
     case POST_PACKLIST_SUCCESS:
       let successfulPost = Object.assign({}, state, {
-        status: action.status,
-        packLists: action.post
+        status: action.status
       });
       return successfulPost;
 
@@ -66,20 +70,21 @@ function packApp(state = initialState, action) {
       return successfulPackList;
 
     case EDIT_PACKLIST_SUCCESS:
-      let successfulEdit = Object.assign({}, state, {
+      let successfulEdit = Object.assign({}, state.currentData)
+      let newEditRequest = JSON.parse(JSON.stringify(successfulEdit));
+      let returnMe = Object.assign({}, newEditRequest, {        
+      pack: action.post,
+      timestamp: Date.now()}); // saving PUT response to new state
+      let updated = Object.assign({}, state, returnMe, {
         status: action.status,
-        currentData: action.packList
-      });
-      return successfulEdit;
+      }) // saving status response to new state after post is updated to ensure component doesn't rerender before new props are mapped 
+      return updated;
 
     case ADD:
-      action.values.pack.forEach(item => state.currentData.pack.push(item))
-      // state.currentData.pack.push(action.values.pack);
-      // let newObj = action.values.pack.map(pack => pack );
-      console.log(action.values, 'actionvalues', state);
-      // const add = Object.assign({}, state);
-
-      return state;
+      let newState = Object.assign({}, state);
+      let newStateObj = JSON.parse(JSON.stringify(newState));
+      action.values.pack.forEach(item => newStateObj.currentData.pack.push(item))
+      return newStateObj;
 
     case REMOVE:
     let remove = Object.assign({}, state);

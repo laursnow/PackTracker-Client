@@ -5,7 +5,7 @@ import { fetchDashboard } from "../../redux/actions";
 import Snippet from "../snippet";
 import Nav from "../nav";
 import requiresLogin from "../requires-login";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import Loader from "../loader";
 import ErrorComponent from "../error";
 
@@ -13,14 +13,15 @@ import ErrorComponent from "../error";
 
 export class Dashboard extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state !== nextState;
-  }
+    return this.props.snippets !== nextProps.snippets || this.props.history !== nextProps.history;
+  } // making sure the component rerenders after the fetch request updates the snippets field
+
   componentDidMount() {
     this.props.dispatch(fetchDashboard(this.props.user));
   }
 
   render() {
-    if (this.props.status === "loading" || this.props.statusAuth === true || this.props.snippets === null) {
+    if (this.props.status === "loading" || this.props.statusAuth === true ) {
       return <Loader />;
     }
 
@@ -32,36 +33,35 @@ export class Dashboard extends React.Component {
       return <ErrorComponent />;
     }
     else {
-    const snippets = this.props.snippets.map((snippet, index) => (
-      <div className="container-snippet" key={index}>
-        <Snippet index={index} {...snippet} />
-        
-      </div>
-      
-      
-    ));
+    console.log(this.props.user, this.props.snippets, this.props)
     return (
       <div className="item-dashboard">
         <div className="nav">
           <Nav />
         </div>
         <h2 className="title-bg">{this.props.user}'s Saved Packing Lists</h2>
-        {snippets}
-        <br />
+        {this.props.snippets.map((snippet, index) => (
+        <div className="container-snippet" key={index}>
+          <Snippet index={index} {...snippet} /></div>))}
+
         <Link to="./create">
           <i className="fas fa-plus big">
             <span className="bree-font"> Add New</span>
           </i>
         </Link>
-      </div>
+    </div>
     );
-  }
-}
-}
+        }
+      }
+    }
+    
+  
+
+
 const mapStateToProps = state => ({
+  snippets: state.packApp.packLists,
   status: state.packApp.status,
   statusAuth: state.auth.status,
-  snippets: state.packApp.packLists,
   user: state.auth.currentUser.username
 });
 
@@ -69,9 +69,9 @@ const mapDispatchToProps = {
   fetchDashboard
 };
 
-export default requiresLogin()(
+export default requiresLogin()(withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
   )(Dashboard)
-);
+));
