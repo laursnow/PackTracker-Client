@@ -19,7 +19,7 @@ export class LandingPage extends React.Component {
           <div className="item-landing-1">
             <div className="item-title">
               <h1 id="top" className="shadow">
-                TrackPack
+                PackTracker
               </h1>
               <h3 className="shadow">Use navigation to begin ></h3>
             </div>
@@ -55,7 +55,7 @@ export class LandingPage extends React.Component {
           <div className="item-landing-1">
             <div className="item-title">
               <h1 id="top" className="shadow">
-                TrackPack
+                PackTracker
               </h1>
               <h3 className="shadow">
                 A simple web app for tracking trip packing

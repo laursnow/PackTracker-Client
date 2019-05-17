@@ -52,7 +52,6 @@ export class App extends React.Component {
             <Route exact path="/create" component={CreatePackList} />
             <Route exact path="/view/:id" component={ViewPackListPage} />
             <Route exact path="/about" component={About} />
-            <Route exact path="/" component={LandingPage} />
           </Scroll>
         </Switch>
       </div>

@@ -10,13 +10,14 @@ export class AddListItemForm extends React.Component {
 
   render() {
     const styleButton = {
-      fontSize: "16px",
-      textAlign: "center"
+      fontSize: "18px",
+      textAlign: "center",
+      padding: "0px",
+      margin: "0px",
+      height: "30px",
+      width: "200px"
     };
 
-    const stylePadding = {
-      paddingTop: "10px"
-    };
 
     const renderField = ({ input, label, type, meta: { touched, error } }) => (
       <div>
@@ -38,7 +39,7 @@ export class AddListItemForm extends React.Component {
             Add Item
           </span>
         </i>
-        <ul className=".item-fields-flex" style={stylePadding}>
+        <ul className=".item-fields-flex" style={{padding: "5px"}}>
           {fields.map((pack, index) => (
             <li key={index}>
               <Field
@@ -70,15 +71,16 @@ export class AddListItemForm extends React.Component {
       );
     }
     return (
+      
       <form
         className="edit-form"
         onSubmit={this.props.handleSubmit((values, dispatch) =>
           this.onSubmit(values, dispatch)
         )}
       >
-        {successMessage}
-        {errorMessage}
-
+   <p style={{fontSize: "20px"}}>{successMessage}
+        {errorMessage}</p>
+        
         <FieldArray name="pack" component={renderItem} />
 
         <button
@@ -86,7 +88,7 @@ export class AddListItemForm extends React.Component {
           type="submit"
           disabled={this.props.pristine || this.props.submitting}
         >
-          Add New Items
+          Save New Items
         </button>
       </form>
     );

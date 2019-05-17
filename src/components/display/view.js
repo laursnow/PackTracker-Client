@@ -79,8 +79,12 @@ export class ViewPackListPage extends React.Component {
         )
       );
       const styleButton = {
-        fontSize: "16px",
-        textAlign: "center"
+        fontSize: "22px",
+        textAlign: "center",
+        padding: "0px",
+        margin: "0px",
+        height: "40px",
+        width: "250px"
       };
 
       return (
@@ -98,25 +102,28 @@ export class ViewPackListPage extends React.Component {
           {packListItems}
           <div />
           <AddListItemForm />
-          <br />
+          <p style={{ padding: "0px" }}>
+            Be sure to save your progress below before exiting the page.
+          </p>
           <button
             type="submit"
             onClick={() => this.props.editPackList(this.props.updateData, id)}
             style={styleButton}
           >
-            Save Pack List
+            Save Packing List
           </button>
           <br />
           <i
             onClick={() => this.props.deletePackList(id)}
             className="fas fa-trash"
             alt="Delete"
+            style={{ paddingTop: "18px" }}
           >
             <span className="bree-font"> Delete</span>
           </i>
           <br />
           <Link to="/dashboard">
-            <i className="fas fa-home">
+            <i className="fas fa-home" style={{ paddingBottom: "18px" }}>
               <span className="bree-font">Return to dashboard</span>
             </i>
           </Link>
@@ -147,3 +154,12 @@ export default requiresLogin()(
     mapDispatchToProps
   )(ViewPackListPage)
 );
+
+          
+// <i
+// onClick={() => {this.props.deletePackList(this.props._id);window.confirm('Deleted.')}}
+// className="fas fa-trash big"
+// alt="Delete"
+// >
+// <span className="bree-font"> Delete</span>
+// </i>

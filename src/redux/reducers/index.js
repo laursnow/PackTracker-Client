@@ -45,7 +45,6 @@ function packApp(state = initialState, action) {
       let updatedSuccessful = Object.assign({}, successfulNextTwo, {
         status: action.status,
       })
-      // console.log(updatedSuccessful, '@@@@', state, '^^^^')
       return updatedSuccessful;
 
     case POST_PACKLIST_SUCCESS:
@@ -54,7 +53,7 @@ function packApp(state = initialState, action) {
       });
       return successfulPost;
 
-    case DELETE_SUCCESS:
+    case DELETE_SUCCESS: // remove from state?
       let successfulDeletion = Object.assign({}, state, {
         status: action.status,
         message: action.message

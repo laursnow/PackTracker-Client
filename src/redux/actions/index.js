@@ -163,8 +163,8 @@ export const deletePackList = id => (dispatch, getState) => {
       }
       return res.json();
     })
-    .then(item => {
-      dispatch(deleteSuccess("Deletion successful."));
+    .then(() => {
+      dispatch(deleteSuccess("List deleted successfully."));
     })
     .catch(err => {
       dispatch(fetchFailure(err));
