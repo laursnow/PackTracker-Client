@@ -2,7 +2,6 @@ import React from 'react';
 
 import {About} from '../components/about';
 import {LandingPage} from '../components/landing-page';
-import {Loader} from '../components/Loader';
 import {ErrorComponent} from '../components/error'; 
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
