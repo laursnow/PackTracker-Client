@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {About} from '../components/about';
 import {LandingPage} from '../components/landing-page';
 import {ErrorComponent} from '../components/error'; 
