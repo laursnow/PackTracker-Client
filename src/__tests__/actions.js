@@ -1,9 +1,11 @@
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 import {
     FETCH_FAILURE,
-    fetchRequest,
-    FETCH_REQUEST,
     fetchFailure,
+    FETCH_REQUEST,
+    fetchRequest,
     FETCH_DB_SUCCESS,
     fetchDbSuccess,
     POST_PACKLIST_SUCCESS,
@@ -22,6 +24,8 @@ import {
     editPackListSuccess
   } from "../redux/actions/index";
 
+  Enzyme.configure({ adapter: new Adapter() });
+  
 describe('fetchRequest', () => {
   it('Should return the action', () => {
     const status = "loading";
@@ -29,7 +33,7 @@ describe('fetchRequest', () => {
     expect(action.type).toEqual(FETCH_REQUEST);
     expect(action.status).toEqual(status)
   })
-})
+});
 
 describe('fetchFailure', () => {
     it('Should return the action', () => {
@@ -38,23 +42,20 @@ describe('fetchFailure', () => {
       expect(action.type).toEqual(FETCH_FAILURE);
       expect(action.status).toEqual(status)
     })
-  })
+  });
   
   describe('fetchDbSuccess', () => {
     it('Should return the action', () => {
-      const packListSnippets = {key: "value"}
+      const packListSnippets = {key: "value"};
       const action = fetchDbSuccess(packListSnippets);
       expect(action.type).toEqual(FETCH_DB_SUCCESS);
       expect(action.packListSnippets).toEqual(packListSnippets)
     })
-  })
+  });
   
-
-
-
   describe('postPackListSuccess', () => {
     it('Should return the action', () => {
-        const post = {key: "value"}
+        const post = {key: "value"};
         const action = postPackListSuccess(post);
         expect(action.type).toEqual(POST_PACKLIST_SUCCESS);
         expect(action.post).toEqual(post);
@@ -63,8 +64,8 @@ describe('fetchFailure', () => {
 
 describe('deleteSuccess', () => {
     it('Should return the action', () => {
-        const index = 0
-        const action = deleteSuccess(index);
+        const index = 0;
+        const action = deleteSuccess('message', index);
         expect(action.type).toEqual(DELETE_SUCCESS);
         expect(action.index).toEqual(index);
     });
@@ -72,7 +73,7 @@ describe('deleteSuccess', () => {
 
 describe('fetchPackListSuccess', () => {
     it('Should return the action', () => {
-        const viewOne = {key: "value"}
+        const viewOne = {key: "value"};
         const action = fetchPackListSuccess(viewOne);
         expect(action.type).toEqual(FETCH_PACKLIST_SUCCESS);
         expect(action.viewOne).toEqual(viewOne);
@@ -81,7 +82,7 @@ describe('fetchPackListSuccess', () => {
 
 describe('editPackListSuccess', () => {
     it('Should return the action', () => {
-        const post = {key: "value"}
+        const post = {key: "value"};
         const action = editPackListSuccess(post);
         expect(action.type).toEqual(EDIT_PACKLIST_SUCCESS);
         expect(action.post).toEqual(post);
@@ -90,7 +91,7 @@ describe('editPackListSuccess', () => {
 
 describe('add', () => {
     it('Should return the action', () => {
-        const values = [{key: "value"}]
+        const values = [{key: "value"}];
         const action = add(values);
         expect(action.type).toEqual(ADD);
         expect(action.values).toEqual(values);
@@ -99,7 +100,7 @@ describe('add', () => {
 
 describe('remove', () => {
     it('Should return the action', () => {
-        const index = 0
+        const index = 0;
         const action = remove(index);
         expect(action.type).toEqual(REMOVE);
         expect(action.index).toEqual(index);
