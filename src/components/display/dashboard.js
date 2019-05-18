@@ -33,7 +33,6 @@ export class Dashboard extends React.Component {
       return <ErrorComponent />;
     }
     else {
-    console.log(this.props.user, this.props.snippets, this.props)
     return (
       <div className="item-dashboard">
         <div className="nav">

@@ -76,7 +76,7 @@ export class Snippet extends React.Component {
           </Link>
           
           <i
-            onClick={() => this.props.deletePackList(this.props._id)}
+            onClick={() => this.props.deletePackList(this.props._id, this.props.index)}
             className="fas fa-trash big"
             alt="Delete"
           >

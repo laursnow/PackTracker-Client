@@ -32,10 +32,11 @@ export const postPackListSuccess = post => ({
 });
 
 export const DELETE_SUCCESS = "DELETE_SUCCESS";
-export const deleteSuccess = message => ({
+export const deleteSuccess = (message, index) => ({
   type: DELETE_SUCCESS,
   status: "success",
-  message
+  message,
+  index
 });
 
 export const FETCH_PACKLIST_SUCCESS = "FETCH_PACKLIST_SUCCESS";
@@ -147,7 +148,7 @@ export const postPackList = post => (dispatch, getState) => {
     });
 };
 
-export const deletePackList = id => (dispatch, getState) => {
+export const deletePackList = (id, index) => (dispatch, getState) => {
   console.log("deletepackList firiing", id, `${API_BASE_URL}/packList/${id}`);
   dispatch(fetchRequest());
   const authToken = getState().auth.authToken;
@@ -161,10 +162,9 @@ export const deletePackList = id => (dispatch, getState) => {
       if (!res.ok) {
         return Promise.reject(res.statusText);
       }
-      return res.json();
     })
     .then(() => {
-      dispatch(deleteSuccess("List deleted successfully."));
+      dispatch(deleteSuccess("List deleted successfully.", index));
     })
     .catch(err => {
       dispatch(fetchFailure(err));
