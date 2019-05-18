@@ -21,11 +21,6 @@ describe('<LandingPage />', () => {
     })
 });
 
-describe('<Loader />', () => {
-    it('Renders without crashing', () => {
-        shallow(<Loader />);
-    })
-});
 
 describe('<ErrorComponent />', () => {
     it('Renders without crashing', () => {
