@@ -11,7 +11,7 @@ import Loader from "../loader";
 
 // Component to render form that creates a packing list
 
-class CreatePackList extends React.Component {
+export class CreatePackList extends React.Component {
   render() {
     if (this.props.status === "loading" || this.props.statusAuth === true) {
       return <Loader />;

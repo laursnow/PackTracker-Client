@@ -91,7 +91,6 @@ export const fetchDashboard = id => (dispatch, getState) => {
       return res.json();
     })
     .then(item => {
-      console.log(item);
       dispatch(fetchDbSuccess(item));
     })
     .catch(err => {
@@ -150,7 +149,6 @@ export const postPackList = post => (dispatch, getState) => {
 };
 
 export const deletePackList = (id, index) => (dispatch, getState) => {
-  console.log("deletepackList firiing", id, `${API_BASE_URL}/packList/${id}`);
   dispatch(fetchRequest());
   const authToken = getState().auth.authToken;
   fetch(`${API_BASE_URL}/packList/${id}`, {
@@ -174,7 +172,6 @@ export const deletePackList = (id, index) => (dispatch, getState) => {
 
 export const editPackList = (post, id) => (dispatch, getState) => {
   dispatch(fetchRequest());
-  console.log("update firing", post, id);
   const authToken = getState().auth.authToken;
   fetch(`${API_BASE_URL}/packList/${id}`, {
     method: "PUT",
