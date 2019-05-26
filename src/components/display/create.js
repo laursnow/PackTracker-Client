@@ -2,9 +2,8 @@ import React from "react";
 import "../App.css";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
-import CreatePackListForm from "../forms/add-packlist";
+import CreatePackListForm from "../forms/create-packlist";
 import Nav from "../nav";
-
 import requiresLogin from "../requires-login";
 import ErrorComponent from "../error";
 import Loader from "../loader";
@@ -24,7 +23,9 @@ export class CreatePackList extends React.Component {
     ) {
       return <ErrorComponent />;
     }
-
+  if (this.props.status === "success") {
+  return (<div>Success!</div>)
+}
       return (
         <div className="item-create">
           <div className="nav">

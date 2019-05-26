@@ -69,20 +69,6 @@ export class CreatePackListForm extends React.Component {
       />
     );
 
-    let successMessage;
-    if (this.props.submitSucceeded) {
-      successMessage = (
-        <div className="message message-success">New list saved!</div>
-      );
-    }
-
-    let errorMessage;
-    if (this.props.error) {
-      errorMessage = (
-        <div className="message message-error">{this.props.error}</div>
-      );
-    }
-
     return (
       <form
         className="add-form"
@@ -90,10 +76,6 @@ export class CreatePackListForm extends React.Component {
           this.onSubmit(values, dispatch)
         )}
       >
-        <p style={{ color: "black", fontSize: "30px" }}>
-          {successMessage}
-          {errorMessage}
-        </p>
 
         <label htmlFor="title">Trip title</label>
         <Field
@@ -126,12 +108,14 @@ export class CreatePackListForm extends React.Component {
           type="submit"
           disabled={this.props.pristine || this.props.submitting}
         >
-          Save PackList
+          Save Packing List
         </button>
       </form>
     );
   }
 }
+
+
 
 export default reduxForm({
   form: "_packList",

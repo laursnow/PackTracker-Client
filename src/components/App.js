@@ -44,7 +44,6 @@ export class App extends React.Component {
       <div className="container-app" id="#up">
                   <LandingPage />
         <Switch>
-
           <Scroll>
             <Route exact path="/login" component={Login} />
             <Route exact path="/dashboard" component={Dashboard} />

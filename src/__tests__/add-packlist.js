@@ -1,5 +1,5 @@
 import React from 'react';
-import {CreatePackListForm} from '../components/forms/add-packlist';
+import {CreatePackListForm} from '../components/forms/create-packlist';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {shallow} from 'enzyme';

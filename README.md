@@ -1,5 +1,4 @@
 # PackTracker
-## A simple web app for tracking trip packing
 
 ## Application Demo
 **[Live Application](https://packtracker-app.herokuapp.com/ "packTracker")**
@@ -11,7 +10,7 @@ Password: samplepassword
 
 ## Description
 
-desc
+ A simple web app for tracking trip packing.
 
 ## API Documentation
 
@@ -50,7 +49,7 @@ Interface for viewing all recorded entries (sorted in descending order of each d
 
 * Printable lists
 * Custom categorization of items
-* Most commonly packed items
+* Most commonly packed items/suggested items based on prior packing lists (so you'll never forget your toothbrush again!)
 
 ## Technology
 
