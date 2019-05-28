@@ -11,6 +11,5 @@ export const saveAuthToken = authToken => {
 export const clearAuthToken = () => {
   try {
     localStorage.removeItem("authToken");
-    console.log("clearauthtoken firing");
   } catch (e) {}
 };

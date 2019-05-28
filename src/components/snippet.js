@@ -74,9 +74,11 @@ export class Snippet extends React.Component {
               <span className="bree-font"> View/Edit</span>
             </i>
           </Link>
-          
+
           <i
-            onClick={() => this.props.deletePackList(this.props._id, this.props.index)}
+            onClick={() =>
+              this.props.deletePackList(this.props._id, this.props.index)
+            }
             className="fas fa-trash big"
             alt="Delete"
           >

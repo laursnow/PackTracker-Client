@@ -72,11 +72,11 @@ export class CreatePackListForm extends React.Component {
     return (
       <form
         className="add-form"
-        onSubmit={this.props.handleSubmit((values, dispatch) =>
-          this.onSubmit(values, dispatch)
-        )}
+        onSubmit={this.props.handleSubmit((values, dispatch) => {
+          this.onSubmit(values, dispatch);
+          this.props.onSuccess();
+        })}
       >
-
         <label htmlFor="title">Trip title</label>
         <Field
           name="title"
@@ -114,8 +114,6 @@ export class CreatePackListForm extends React.Component {
     );
   }
 }
-
-
 
 export default reduxForm({
   form: "_packList",

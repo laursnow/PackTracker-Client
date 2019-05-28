@@ -118,12 +118,23 @@ h5 {
   margin-top: 900px;
   text-align: center;
   background-color: #929396;
-  width: 85%
+  width: 85%;
+}
+
+.item-about {
+  padding: 20px;
+  position: relative;
+  margin-top: 900px;
+  text-align: center;
+  background-color: #929396;
+  width: 70%;
+  box-shadow: 2px 2px 6px #3b3c3f;
+  border: 1px solid #dfe0e2;
 }
 
 .item-auth {
   width: 35%;
-  box-shadow: 2px 2px 6px #3b3c3f;
+
 }
 
 .form-button:hover,
@@ -327,6 +338,15 @@ input {
   color: black;
 }
 
+.pack-list-items {
+  color: #f1e9db;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 @media only screen and (max-width: 1082px) {
   .nav li {
     padding: 2px;
@@ -383,6 +403,7 @@ input {
     text-align: right;
   }
 
+  .item-about,
   .item-auth,
   .item-dashboard,
   .item-create,
@@ -410,7 +431,7 @@ input {
   p {
     font-size: 22px;
   }
-} 
+}
 
 @media only screen and (max-width: 572px) {
   .nav li {

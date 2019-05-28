@@ -28,7 +28,7 @@ export class App extends React.Component {
   startPeriodicRefresh() {
     this.refreshInterval = setInterval(
       () => this.props.dispatch(refreshAuthToken()),
-      60 * 60 * 1000 
+      60 * 60 * 1000
     );
   }
 
@@ -42,7 +42,7 @@ export class App extends React.Component {
   render() {
     return (
       <div className="container-app" id="#up">
-                  <LandingPage />
+        <LandingPage />
         <Switch>
           <Scroll>
             <Route exact path="/login" component={Login} />

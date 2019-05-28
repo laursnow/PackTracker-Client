@@ -20,6 +20,17 @@ import AddListItemForm from "../forms/add-listitemform";
 // Renders component for view/interacting with existing lists further
 
 export class ViewPackListPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isSuccess: false };
+  }
+
+  onSuccess = () => {
+    this.setState(() => ({
+      isSuccess: true
+    }));
+  };
+
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.dispatch(fetchPackList(id));
@@ -99,18 +110,23 @@ export class ViewPackListPage extends React.Component {
             {datesFormatted.date_return}
           </h3>
           <h4>Last Updated: {datesFormatted.timestamp}</h4>
-          {packListItems}
-          <div />
-          <AddListItemForm />
+          {this.state.isSuccess && this.props.status === "success" && (
+            <h3>List successfully saved.</h3>
+          )}
           <br />
           <button
             type="submit"
-            onClick={() => this.props.editPackList(this.props.updateData, id)}
+            onClick={() => {
+              this.props.editPackList(this.props.updateData, id);
+              this.onSuccess();
+            }}
             style={styleButton}
           >
             Save Packing List
           </button>
-          <br />
+          <div className="pack-list-items">{packListItems}</div>
+          <AddListItemForm />
+          <br /> <br />
           <Link to="/dashboard">
             <i className="fas fa-home" style={{ paddingBottom: "18px" }}>
               <span className="bree-font">Return to dashboard</span>

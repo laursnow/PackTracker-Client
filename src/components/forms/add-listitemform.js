@@ -1,12 +1,12 @@
 import React from "react";
 import "../App.css";
 import { add } from "../../redux/actions";
-import { reduxForm, Field, FieldArray, reset } from "redux-form";
+import { reduxForm, Field, FieldArray } from "redux-form";
 
 export class AddListItemForm extends React.Component {
   onSubmit(values, dispatch) {
-    return dispatch(add(values))
-    }
+    return dispatch(add(values));
+  }
 
   render() {
     const styleButton = {
@@ -17,7 +17,6 @@ export class AddListItemForm extends React.Component {
       height: "30px",
       width: "200px"
     };
-
 
     const renderField = ({ input, label, type, meta: { touched, error } }) => (
       <div>
@@ -31,15 +30,7 @@ export class AddListItemForm extends React.Component {
 
     const renderItem = ({ fields, meta: { error } }) => (
       <div>
-        <i className="fas fa-plus item-fields" onClick={() => fields.push({})}>
-          <span
-            className="bree-font"
-            style={{ color: "black", fontSize: "20px" }}
-          >
-            Add Item
-          </span>
-        </i>
-        <ul className=".item-fields-flex" style={{padding: "5px"}}>
+        <ul className=".item-fields-flex" style={{ padding: "5px" }}>
           {fields.map((pack, index) => (
             <li key={index}>
               <Field
@@ -55,34 +46,46 @@ export class AddListItemForm extends React.Component {
           ))}
           {error && <li className="error">{error}</li>}
         </ul>
+        <br />
+        <i className="fas fa-plus item-fields" onClick={() => fields.push({})}>
+          <span
+            className="bree-font"
+            style={{ color: "black", fontSize: "20px" }}
+          >
+            Add Item
+          </span>
+        </i>
       </div>
     );
     let successMessage;
     if (this.props.submitSucceeded) {
       successMessage = (
-        <div className="message message-success" style={{fontSize: "20px"}}>Items added!</div>
+        <div className="message message-success" style={{ fontSize: "20px" }}>
+          Items added!
+        </div>
       );
     }
 
     let errorMessage;
     if (this.props.error) {
       errorMessage = (
-        <div className="message message-error" style={{fontSize: "20px"}}>{this.props.error}</div>
+        <div className="message message-error" style={{ fontSize: "20px" }}>
+          {this.props.error}
+        </div>
       );
     }
     return (
-      
       <form
         className="edit-form"
         onSubmit={this.props.handleSubmit((values, dispatch) =>
           this.onSubmit(values, dispatch)
         )}
       >
-   {successMessage}
+        {successMessage}
         {errorMessage}
-        
+        <br />
         <FieldArray name="pack" component={renderItem} />
-
+        <br />
         <button
           style={styleButton}
           type="submit"

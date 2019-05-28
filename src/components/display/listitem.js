@@ -30,7 +30,7 @@ export class ListItem extends React.Component {
           className="fas fa-check big"
           alt="Check Off"
         />
-        {this.props.pack_item}
+        {this.props.index + 1}. {this.props.pack_item}
       </li>
     );
   }

@@ -13,7 +13,10 @@ import ErrorComponent from "../error";
 
 export class Dashboard extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
-    return this.props.snippets !== nextProps.snippets || this.props.history !== nextProps.history;
+    return (
+      this.props.snippets !== nextProps.snippets ||
+      this.props.history !== nextProps.history
+    );
   } // making sure the component rerenders after the fetch request updates the snippets field
 
   componentDidMount() {
@@ -21,7 +24,7 @@ export class Dashboard extends React.Component {
   }
 
   render() {
-    if (this.props.status === "loading" || this.props.statusAuth === true ) {
+    if (this.props.status === "loading" || this.props.statusAuth === true) {
       return <Loader />;
     }
 
@@ -31,31 +34,29 @@ export class Dashboard extends React.Component {
       this.props.status == null
     ) {
       return <ErrorComponent />;
-    }
-    else {
-    return (
-      <div className="item-dashboard">
-        <div className="nav">
-          <Nav />
+    } else {
+      return (
+        <div className="item-dashboard">
+          <div className="nav">
+            <Nav />
+          </div>
+          <h2 className="title-bg">{this.props.user}'s Saved Packing Lists</h2>
+          {this.props.snippets.map((snippet, index) => (
+            <div className="container-snippet" key={index}>
+              <Snippet index={index} {...snippet} />
+            </div>
+          ))}
+
+          <Link to="./create">
+            <i className="fas fa-plus big">
+              <span className="bree-font"> Add New</span>
+            </i>
+          </Link>
         </div>
-        <h2 className="title-bg">{this.props.user}'s Saved Packing Lists</h2>
-        {this.props.snippets.map((snippet, index) => (
-        <div className="container-snippet" key={index}>
-          <Snippet index={index} {...snippet} /></div>))}
-
-        <Link to="./create">
-          <i className="fas fa-plus big">
-            <span className="bree-font"> Add New</span>
-          </i>
-        </Link>
-    </div>
-    );
-        }
-      }
+      );
     }
-    
-  
-
+  }
+}
 
 const mapStateToProps = state => ({
   snippets: state.packApp.packLists,
@@ -68,9 +69,11 @@ const mapDispatchToProps = {
   fetchDashboard
 };
 
-export default requiresLogin()(withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Dashboard)
-));
+export default requiresLogin()(
+  withRouter(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(Dashboard)
+  )
+);
