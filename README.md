@@ -33,22 +33,22 @@ DELETE/:id    : Delete a packing list
 
 ## Screenshots
 
-![Landing Page](img "login")
+![Landing Page](https://raw.githubusercontent.com/laursnow/PackTracker-Client/master/screenshots/landing.jpg "landing page")
 Landing screen. User can select from several options from the navigation menu.
 
-![Login](img "login")
+![Login](https://raw.githubusercontent.com/laursnow/PackTracker-Client/master/screenshots/login.jpg "login")
 Login form. User can enter their username & password to access their packing lists saved through the application.
 
-![Register](img "register")
+![Register](https://raw.githubusercontent.com/laursnow/PackTracker-Client/master/screenshots/register.jpg "register")
 New users register with a username, password and valid e-mail address.
 
-![Create](img "create")
+![Create](https://raw.githubusercontent.com/laursnow/PackTracker-Client/master/screenshots/create.jpg "create")
 User interface for creating a new packing list.
 
-![Dashboard](db "dashboard")
+![Dashboard](https://raw.githubusercontent.com/laursnow/PackTracker-Client/master/screenshots/db.jpg "dashboard")
 Users are shown all of their saved packing lists and chose one specific entry with which to futher interact. Packing lists can also be deleted from this view.
 
-![Edit packing list](edit"edit list")
+![View/edit packing list](https://raw.githubusercontent.com/laursnow/PackTracker-Client/master/screenshots/view.jpg "view/edit list")
 Interface for viewing and editing individual packing lists.
 
 ## App v2.0 Goals
