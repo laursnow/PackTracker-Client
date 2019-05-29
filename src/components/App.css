@@ -128,7 +128,6 @@ h5 {
 
 .item-auth {
   width: 35%;
-
 }
 
 .form-button:hover,
@@ -341,8 +340,6 @@ input {
   padding-bottom: 20px;
 }
 
-
-
 @media only screen and (min-width: 320px) and (max-width: 1499px) {
   html {
     background: #818388 url("../images/background-itinerator.jpg");
@@ -375,7 +372,7 @@ input {
   }
 
   .nav li {
-  padding-left: 20px;
+    padding-left: 20px;
   }
 
   h1 {
@@ -442,7 +439,6 @@ input {
 }
 
 @media only screen and (min-width: 320px) and (max-width: 797px) {
-
   .item-about,
   .item-auth,
   .item-dashboard,
