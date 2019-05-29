@@ -111,7 +111,7 @@ export class ViewPackListPage extends React.Component {
           </h3>
           <h4>Last Updated: {datesFormatted.timestamp}</h4>
           {this.state.isSuccess && this.props.status === "success" && (
-            <h3>List successfully saved.</h3>
+            <h3 aria-live="polite">List successfully saved.</h3>
           )}
           <br />
           <button

@@ -43,7 +43,7 @@ export class CreatePackList extends React.Component {
         <h2>Create New Packing List</h2>
 
         {this.state.isSuccess && this.props.status === "success" && (
-          <h3>List successfully saved.</h3>
+          <h3 aria-live="polite">List successfully saved.</h3>
         )}
         <CreatePackListForm onSuccess={this.onSuccess} />
         <Link to="/dashboard">

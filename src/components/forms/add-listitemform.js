@@ -44,7 +44,7 @@ export class AddListItemForm extends React.Component {
               />
             </li>
           ))}
-          {error && <li className="error">{error}</li>}
+          {error && <li className="error" aria-live="polite">{error}</li>}
         </ul>
         <br />
         <i className="fas fa-plus item-fields" onClick={() => fields.push({})}>
@@ -60,7 +60,7 @@ export class AddListItemForm extends React.Component {
     let successMessage;
     if (this.props.submitSucceeded) {
       successMessage = (
-        <div className="message message-success" style={{ fontSize: "20px" }}>
+        <div className="message message-success" style={{ fontSize: "20px" }} aria-live="polite">
           Items added!
         </div>
       );
