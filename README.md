@@ -12,7 +12,7 @@ Password: samplepassword
 
 ## Description
 
- A simple web app for tracking trip packing.
+ A simple web app for tracking trip packing. Users can save multiple lists, add, delete and cross out items, as well as save these updates between sessions.
 
 ## API Documentation
 
