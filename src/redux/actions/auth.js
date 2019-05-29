@@ -43,7 +43,6 @@ const storeAuthInfo = (authToken, dispatch) => {
 
 export const login = (username, password) => dispatch => {
   dispatch(authRequest());
-  console.log("login");
   return fetch(`${AUTH_BASE_URL}/login`, {
     method: "POST",
     headers: {
@@ -57,7 +56,7 @@ export const login = (username, password) => dispatch => {
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then(({ authToken }) => storeAuthInfo(authToken, dispatch))
-    .then(console.log("success"))
+    .then(console.log("successful login"))
     .catch(err => {
       const { code } = err;
       const message =
