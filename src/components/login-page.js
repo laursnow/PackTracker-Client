@@ -34,6 +34,11 @@ export class Login extends React.Component {
         <main>
           <h2>Login</h2>
           <LoginForm />
+          <p style={{ fontSize: "20px" }}>
+            Demo Account:
+            <br />
+            Username: sampleuser   Password: samplepassword
+          </p>
           <HashLink to="/#up" className="up">
             Back to top
           </HashLink>
